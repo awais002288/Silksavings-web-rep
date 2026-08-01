@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { products, allReviews } from "@/data/products";
+import { products, getProductById, allReviews } from "@/data/products";
 import { useSEO } from "@/hooks/useSEO";
 
 const trustBadges = [
@@ -16,7 +16,7 @@ const shopCategories = [
     name: "Dried Flowers",
     desc: "Calendula, Rose Petals & more",
     href: "/products?cat=Flowers",
-    image: "/assets/17_1778758092037.webp",
+    image: getProductById("dried-calendula-flowers")!.images[0],
     accent: "#c9a227",
     bg: "#fdf8ee",
   },
@@ -24,7 +24,7 @@ const shopCategories = [
     name: "Seeds & Kernels",
     desc: "Apricot Seeds, Sea Buckthorn & more",
     href: "/products?cat=Seeds+%26+Kernels",
-    image: "/assets/71kEWk0txWL._SL1500__1778758108431.webp",
+    image: getProductById("bitter-apricot-seeds-1lb")!.images[0],
     accent: "#2c5530",
     bg: "#f0f7f0",
   },
@@ -32,7 +32,7 @@ const shopCategories = [
     name: "Herbs & Leaves",
     desc: "Yarrow, Lemon Grass, Rue & more",
     href: "/products?cat=Herbs+%26+Leaves",
-    image: "/assets/45_1778758133808.webp",
+    image: getProductById("dried-lemon-grass")!.images[0],
     accent: "#1e3a22",
     bg: "#e8f5e8",
   },
@@ -310,18 +310,18 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-3 md:gap-4">
               <div className="space-y-3 md:space-y-4">
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-36 md:h-48">
-                  <img src="/assets/18_1778758092037.png" alt="Calendula benefits" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("dried-calendula-flowers")!.images[1] ?? getProductById("dried-calendula-flowers")!.images[0]} alt="Calendula benefits" className="w-full h-full object-contain p-2" />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-48 md:h-64">
-                  <img src="/assets/2_1778758146681.png" alt="Rose petal tea" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("dried-rose-petals")!.images[1] ?? getProductById("dried-rose-petals")!.images[0]} alt="Rose petal tea" className="w-full h-full object-contain p-2" />
                 </div>
               </div>
               <div className="space-y-3 md:space-y-4 pt-6 md:pt-8">
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-48 md:h-64">
-                  <img src="/assets/Apricot+cancer+seeds+kernels+pure+organic_1778758120566.png" alt="Apricot seeds" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("bitter-apricot-seeds-8oz")!.images[0]} alt="Apricot seeds" className="w-full h-full object-contain p-2" />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-36 md:h-48">
-                  <img src="/assets/45_1778758133808.png" alt="Lemon grass" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("dried-lemon-grass")!.images[0]} alt="Lemon grass" className="w-full h-full object-contain p-2" />
                 </div>
               </div>
             </div>

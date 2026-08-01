@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import logo from "@/assets/logo.png";
 
 export default function Footer() {
   return (
@@ -10,7 +11,7 @@ export default function Footer() {
           <div className="flex-shrink-0">
             <div className="flex items-center gap-3 mb-3">
               <img
-                src="/assets/Untitled_design_(14)_1778759060246.png"
+                src={logo}
                 alt="Silk Savings"
                 className="w-10 h-10 rounded-full object-cover ring-2 ring-[#c9a227]/50"
               />

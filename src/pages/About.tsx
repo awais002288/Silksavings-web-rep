@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
+import { getProductById } from "@/data/products";
 
 export default function About() {
   useSEO({
@@ -39,7 +40,7 @@ export default function About() {
             </div>
             <div className="rounded-3xl overflow-hidden shadow-xl h-96">
               <img
-                src="/assets/18_1778758092037.png"
+                src={getProductById("dried-calendula-flowers")!.images[1] ?? getProductById("dried-calendula-flowers")!.images[0]}
                 alt="Calendula flower tea"
                 className="w-full h-full object-cover"
               />

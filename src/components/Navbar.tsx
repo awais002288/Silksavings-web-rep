@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { useCart } from "@/lib/cartContext";
+import logo from "@/assets/logo.png";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,7 +44,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between py-1.5 md:py-2">
           <Link href="/" className="flex items-center gap-2 md:gap-3 group">
             <img
-              src="/assets/Untitled_design_(14)_1778759060246.webp"
+              src={logo}
               alt="Silk Savings Lion Logo"
               className="w-9 h-9 md:w-12 md:h-12 rounded-full object-cover flex-shrink-0 ring-2 ring-[#c9a227]/40 group-hover:ring-[#c9a227] transition-all"
             />
