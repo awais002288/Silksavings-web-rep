@@ -587,7 +587,7 @@ export const products: Product[] = [
       "USDA Organic, Vegan, Gluten-Free",
     ],
     usage: "Steep 1 tsp in 8 oz of hot water for 10 minutes. Drink once daily, preferably in the evening. Do not use for more than 1–2 weeks continuously.",
-    images: [], // TODO: add Senna Leaves photos to src/assets
+    images: imagesForFolder("Seena leaves"),
     badge: "New",
     category: "Herbs & Leaves",
     weight: "4 oz",
@@ -651,7 +651,7 @@ export const products: Product[] = [
       "Supports overall vitality and well-being",
     ],
     usage: "Use the included spatula to measure a pea-sized portion (250-500mg). Dissolve in warm water, milk, or your favorite beverage. Take once daily, preferably in the morning.",
-    images: [], // TODO: add Shilajit photos to src/assets
+    images: imagesForFolder("Shilajit"),
     badge: "Premium",
     category: "Seeds & Kernels",
     weight: "30g",
