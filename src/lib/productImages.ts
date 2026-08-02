@@ -4,10 +4,14 @@ const modules = import.meta.glob("../assets/**/*.{png,jpg,jpeg,webp}", {
   import: "default",
 }) as Record<string, string>;
 
-export function imagesForFolder(folder: string): string[] {
-  const prefix = `../assets/${folder}/`;
+export function imagesForFolder(...folders: string[]): string[] {
+  const prefixes = folders.map((folder) => `../assets/${folder}/`);
   return Object.keys(modules)
-    .filter((path) => path.startsWith(prefix))
+    .filter((path) =>
+      prefixes.some((prefix) => path.startsWith(prefix)) &&
+      !path.includes("/__MACOSX/") &&
+      !path.split("/").pop()!.startsWith("._"),
+    )
     .sort()
     .map((path) => modules[path]);
 }
