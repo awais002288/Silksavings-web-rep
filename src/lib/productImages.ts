@@ -15,3 +15,26 @@ export function imagesForFolder(...folders: string[]): string[] {
     .sort()
     .map((path) => modules[path]);
 }
+
+// Loose match: lowercase, alphanumeric only. Production builds rewrite
+// commas/spaces/etc. in hashed filenames, so exact-string matching between
+// a hint and a built asset URL isn't reliable — this is.
+function normalize(s: string): string {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+// Reorders `images` so the one whose filename matches `filenameHint` is first
+// (used as the product's main/thumbnail photo). Matches against the basename
+// only, since folder names can otherwise cause false matches.
+export function withPrimary(images: string[], filenameHint: string): string[] {
+  const hint = normalize(filenameHint);
+  const idx = images.findIndex((url) => {
+    const basename = url.split("/").pop() ?? "";
+    return normalize(basename).includes(hint);
+  });
+  if (idx <= 0) return images;
+  const reordered = [...images];
+  const [primary] = reordered.splice(idx, 1);
+  reordered.unshift(primary);
+  return reordered;
+}

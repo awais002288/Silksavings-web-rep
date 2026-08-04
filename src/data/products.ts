@@ -1,4 +1,4 @@
-import { imagesForFolder } from "@/lib/productImages";
+import { imagesForFolder, withPrimary } from "@/lib/productImages";
 
 export interface NutritionFacts {
   servingSize: string;
@@ -147,7 +147,7 @@ export const products: Product[] = [
   {
     id: "bitter-apricot-seeds-8oz",
     name: "Organic Bitter Apricot Seeds (8 oz)",
-    price: 17.99,
+    price: 19.99,
     description: "Raw, unprocessed bitter apricot kernels — sustainably sourced, 100% pure organic, USDA certified.",
     longDescription:
       "Our Organic Bitter Apricot Seeds (8 oz) are carefully sourced and minimally processed to preserve all their natural goodness. These raw, unprocessed kernels have been used in traditional wellness practices across many cultures. Sustainably sourced, premium quality kernels for a healthy and natural lifestyle. Rich in healthy fats and protein, they make a distinctive addition to your daily wellness routine. Enjoy 3 kernels daily — add to yogurt, smoothies, salads, or soups.",
@@ -215,7 +215,7 @@ export const products: Product[] = [
       "No preservatives or additives",
     ],
     usage: "Enjoy 3 kernels daily. Add to yogurt, blend into smoothies, sprinkle on salads, or stir into soups.",
-    images: imagesForFolder("1Lb apricot"),
+    images: withPrimary(imagesForFolder("1Lb apricot"), "IMG_0574"),
     badge: "Best Value",
     category: "Seeds & Kernels",
     weight: "1 lb",
@@ -325,7 +325,7 @@ export const products: Product[] = [
       "100% organic, non-GMO, additive-free",
     ],
     usage: "Steep 1 tsp of dried yarrow in 8 oz of hot water for 5-10 minutes. Strain and enjoy. May be sweetened with honey.",
-    images: imagesForFolder("Yarrowherb"),
+    images: withPrimary(imagesForFolder("Yarrowherb"), "Yarrow Herbs (6)"),
     category: "Herbs & Leaves",
     weight: "4 oz",
     prepSteps: teaPrepSteps,
@@ -373,7 +373,7 @@ export const products: Product[] = [
       "Versatile culinary ingredient",
     ],
     usage: "Steep 1-2 tsp in 8 oz of boiling water for 5 minutes. Can also be used in soups, curries, and marinades for a bright citrus note.",
-    images: imagesForFolder("Lemongrass"),
+    images: withPrimary(imagesForFolder("Lemongrass"), "ChatGPT Image Jul 25, 2026, 09_30_27 AM"),
     category: "Herbs & Leaves",
     weight: "4 oz",
     prepSteps: [
@@ -426,7 +426,7 @@ export const products: Product[] = [
       "Intense, complex aromatic profile",
     ],
     usage: "Use sparingly — steep a small pinch in 8 oz of hot water for 5 minutes. Consult a healthcare provider before use if pregnant.",
-    images: imagesForFolder("Rue herb"),
+    images: withPrimary(imagesForFolder("Rue herb"), "rue herb tea"),
     category: "Herbs & Leaves",
     weight: "2 oz",
     prepSteps: [
@@ -478,7 +478,7 @@ export const products: Product[] = [
       "USDA Organic, Non-GMO, Vegan",
     ],
     usage: "Steep 1 tsp in 8 oz of hot water for 5-8 minutes for a warming herbal tea. Also excellent as a culinary spice in marinades, sauces, and gin-inspired recipes.",
-    images: imagesForFolder("Juniper berries"),
+    images: withPrimary(imagesForFolder("Juniper berries"), "Juniper"),
     badge: "New",
     category: "Herbs & Leaves",
     weight: "4 oz",
@@ -587,7 +587,7 @@ export const products: Product[] = [
       "USDA Organic, Vegan, Gluten-Free",
     ],
     usage: "Steep 1 tsp in 8 oz of hot water for 10 minutes. Drink once daily, preferably in the evening. Do not use for more than 1–2 weeks continuously.",
-    images: imagesForFolder("Seena leaves"),
+    images: withPrimary(imagesForFolder("Seena leaves"), "ChatGPT Image Jul 25, 2026, 10_12_19 AM"),
     badge: "New",
     category: "Herbs & Leaves",
     weight: "4 oz",
