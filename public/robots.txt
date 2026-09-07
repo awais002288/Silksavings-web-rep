@@ -2,12 +2,23 @@
 
 User-agent: *
 Allow: /
+Allow: /products
 Allow: /products/
 Allow: /about
 Allow: /contact
 Allow: /returns
 Allow: /privacy
 Allow: /assets/
+
+# Disallow low-value query parameters (sorting, pagination, search, price filters)
+Disallow: /*?*sort=
+Disallow: /*?*order=
+Disallow: /*?*page=
+Disallow: /*?*p=
+Disallow: /*?*q=
+Disallow: /*?*search=
+Disallow: /*?*price=
+Disallow: /*?*filter=
 
 # Disallow private, cart, and transactional endpoints
 Disallow: /cart
@@ -19,7 +30,16 @@ Disallow: /api/
 # Explicit rules for Googlebot
 User-agent: Googlebot
 Allow: /
+Allow: /products
 Allow: /products/
+Disallow: /*?*sort=
+Disallow: /*?*order=
+Disallow: /*?*page=
+Disallow: /*?*p=
+Disallow: /*?*q=
+Disallow: /*?*search=
+Disallow: /*?*price=
+Disallow: /*?*filter=
 Disallow: /cart
 Disallow: /checkout
 Disallow: /api/
@@ -27,7 +47,16 @@ Disallow: /api/
 # Explicit rules for Bingbot
 User-agent: Bingbot
 Allow: /
+Allow: /products
 Allow: /products/
+Disallow: /*?*sort=
+Disallow: /*?*order=
+Disallow: /*?*page=
+Disallow: /*?*p=
+Disallow: /*?*q=
+Disallow: /*?*search=
+Disallow: /*?*price=
+Disallow: /*?*filter=
 Disallow: /cart
 Disallow: /checkout
 Disallow: /api/

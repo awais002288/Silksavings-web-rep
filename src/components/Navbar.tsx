@@ -53,12 +53,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/products", label: "Products" },
-    { href: "/about", label: "About Us" },
-    { href: "/contact", label: "Contact" },
-  ];
 
   return (
     <header
@@ -85,19 +79,64 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium tracking-wide transition-colors font-sans ${
-                  location === link.href
-                    ? "text-[#c9a227]"
-                    : "text-white/80 hover:text-white"
-                }`}
+            <Link
+              href="/"
+              className={`text-sm font-medium tracking-wide transition-colors font-sans ${
+                location === "/" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              }`}
+            >
+              Home
+            </Link>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium tracking-wide transition-colors font-sans text-white/80 hover:text-white outline-none cursor-pointer">
+                Products
+                <ChevronDown className="w-3.5 h-3.5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="start"
+                className="bg-[#1a3320] border-white/10 text-white/90 min-w-44"
               >
-                {link.label}
-              </Link>
-            ))}
+                <DropdownMenuItem asChild>
+                  <Link href="/products" className="cursor-pointer font-sans focus:bg-white/10 focus:text-white font-semibold">
+                    All Products
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/products?cat=Flowers" className="cursor-pointer font-sans focus:bg-white/10 focus:text-white">
+                    Dried Flowers
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/products?cat=Seeds+%26+Kernels" className="cursor-pointer font-sans focus:bg-white/10 focus:text-white">
+                    Seeds &amp; Kernels
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/products?cat=Herbs+%26+Leaves" className="cursor-pointer font-sans focus:bg-white/10 focus:text-white">
+                    Herbs &amp; Leaves
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Link
+              href="/about"
+              className={`text-sm font-medium tracking-wide transition-colors font-sans ${
+                location === "/about" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              }`}
+            >
+              About Us
+            </Link>
+
+            <Link
+              href="/contact"
+              className={`text-sm font-medium tracking-wide transition-colors font-sans ${
+                location === "/contact" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              }`}
+            >
+              Contact
+            </Link>
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium tracking-wide transition-colors font-sans text-white/80 hover:text-white outline-none cursor-pointer">
                 Certifications
@@ -163,20 +202,69 @@ export default function Navbar() {
 
         {menuOpen && (
           <div className="md:hidden border-t border-white/10 py-3 flex flex-col gap-2">
-            {links.map((link) => (
+            <Link
+              href="/"
+              className={`text-sm font-medium px-2 py-1.5 rounded transition-colors font-sans ${
+                location === "/" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              }`}
+              onClick={() => setMenuOpen(false)}
+            >
+              Home
+            </Link>
+
+            <div className="px-2 py-1">
               <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium px-2 py-1.5 rounded transition-colors font-sans ${
-                  location === link.href
-                    ? "text-[#c9a227]"
-                    : "text-white/80 hover:text-white"
-                }`}
+                href="/products"
+                className="text-sm font-medium text-white/80 font-sans hover:text-[#c9a227] flex items-center justify-between mb-1"
                 onClick={() => setMenuOpen(false)}
               >
-                {link.label}
+                <span>Products</span>
+                <span className="text-[#c9a227] text-xs">All Products →</span>
               </Link>
-            ))}
+              <div className="flex flex-col gap-1 pl-2 border-l border-white/10">
+                <Link
+                  href="/products?cat=Flowers"
+                  className="text-xs text-white/70 hover:text-[#c9a227] transition-colors font-sans py-0.5"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Dried Flowers
+                </Link>
+                <Link
+                  href="/products?cat=Seeds+%26+Kernels"
+                  className="text-xs text-white/70 hover:text-[#c9a227] transition-colors font-sans py-0.5"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Seeds &amp; Kernels
+                </Link>
+                <Link
+                  href="/products?cat=Herbs+%26+Leaves"
+                  className="text-xs text-white/70 hover:text-[#c9a227] transition-colors font-sans py-0.5"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Herbs &amp; Leaves
+                </Link>
+              </div>
+            </div>
+
+            <Link
+              href="/about"
+              className={`text-sm font-medium px-2 py-1.5 rounded transition-colors font-sans ${
+                location === "/about" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              }`}
+              onClick={() => setMenuOpen(false)}
+            >
+              About Us
+            </Link>
+
+            <Link
+              href="/contact"
+              className={`text-sm font-medium px-2 py-1.5 rounded transition-colors font-sans ${
+                location === "/contact" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              }`}
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact
+            </Link>
             <div className="px-2 py-1.5">
               <div className="text-sm font-medium text-white/80 font-sans mb-1.5">
                 Certifications

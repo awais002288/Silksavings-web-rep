@@ -7,6 +7,7 @@ interface SEOProps {
   image?: string;
   canonical?: string;
   noindex?: boolean;
+  jsonLd?: Record<string, any> | Record<string, any>[];
 }
 
 function setMeta(selector: string, attr: string, value: string) {
@@ -20,7 +21,7 @@ function setMeta(selector: string, attr: string, value: string) {
   el.setAttribute(attr, value);
 }
 
-export function useSEO({ title, description, keywords, image, canonical, noindex }: SEOProps) {
+export function useSEO({ title, description, keywords, image, canonical, noindex, jsonLd }: SEOProps) {
   useEffect(() => {
     document.title = title;
 
@@ -59,5 +60,25 @@ export function useSEO({ title, description, keywords, image, canonical, noindex
 
       setMeta('meta[property="og:url"]', 'content', canonical);
     }
-  }, [title, description, keywords, image, canonical]);
+
+    // Structured data (JSON-LD)
+    const scriptId = 'seo-structured-data';
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+    if (jsonLd) {
+      if (!script) {
+        script = document.createElement('script');
+        script.id = scriptId;
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(jsonLd);
+    } else if (script) {
+      script.remove();
+    }
+
+    return () => {
+      const el = document.getElementById(scriptId);
+      if (el) el.remove();
+    };
+  }, [title, description, keywords, image, canonical, noindex, JSON.stringify(jsonLd)]);
 }

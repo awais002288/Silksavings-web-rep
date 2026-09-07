@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link, useParams } from "wouter";
 import { getProductById, products } from "@/data/products";
 import { useSEO } from "@/hooks/useSEO";
 import { useCart } from "@/lib/cartContext";
+import { generateProductJsonLd } from "@/lib/schema";
 import halalCertification from "@/assets/certifications/halal-certification.webp";
 import gmpCertification from "@/assets/certifications/gmp-certification.webp";
 import certificateOfAnalysis from "@/assets/certifications/certificate-of-analysis.webp";
@@ -154,6 +155,45 @@ function NutritionLabel({ facts }: { facts: NonNullable<ReturnType<typeof getPro
   );
 }
 
+function ProductNotFound() {
+  useSEO({
+    title: "Product Not Found | Silk Savings®",
+    description: "The requested organic product could not be found. Browse our full catalog of USDA Organic herbs, flowers, and seeds.",
+    noindex: true,
+  });
+
+  return (
+    <div className="min-h-[75vh] flex items-center justify-center px-4 py-16 bg-[#f9f7f2]">
+      <div className="text-center max-w-md bg-white p-8 md:p-10 rounded-3xl border border-gray-100 shadow-xl">
+        <div className="text-6xl mb-4">🌿</div>
+        <div className="text-[#c9a227] text-xs uppercase tracking-widest font-semibold mb-2 font-sans">
+          Item Unavailable
+        </div>
+        <h1 className="text-2xl md:text-3xl font-bold text-[#1e3a22] mb-3 font-display">
+          Product Not Found
+        </h1>
+        <p className="text-gray-600 text-sm mb-8 font-sans leading-relaxed">
+          The product you are looking for might have been moved or is no longer available in our collection.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link
+            href="/products"
+            className="bg-[#2c5530] text-white px-6 py-3 rounded-full font-bold hover:bg-[#1e3a22] transition-colors font-sans text-sm shadow-md"
+          >
+            Explore All Products
+          </Link>
+          <Link
+            href="/"
+            className="border-2 border-[#2c5530] text-[#2c5530] px-6 py-3 rounded-full font-bold hover:bg-[#f0f7f0] transition-colors font-sans text-sm"
+          >
+            Go to Home
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const product = getProductById(id);
@@ -164,28 +204,24 @@ export default function ProductDetail() {
   const [checkoutError, setCheckoutError] = useState("");
 
   if (!product) {
-    return (
-      <div className="min-h-screen flex items-center justify-center pt-16 px-4">
-        <div className="text-center">
-          <div className="text-6xl mb-6">🌿</div>
-          <h2 className="text-2xl font-bold text-[#1e3a22] mb-4">Product not found</h2>
-          <Link href="/products" className="bg-[#2c5530] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#1e3a22] transition-colors font-sans">
-            Back to Products
-          </Link>
-        </div>
-      </div>
-    );
+    return <ProductNotFound />;
   }
+
+  const productSchema = useMemo(() => generateProductJsonLd(product), [product]);
 
   useSEO({
     title: `${product.name} | USDA Organic — Silk Savings®`,
-    description: `Buy ${product.name} — USDA Organic, Non-GMO, lab-tested & free from additives. ${product.shortDescription ?? product.description.slice(0, 80)}`.slice(0, 160),
+    description: `Buy ${product.name} — USDA Organic, Non-GMO, lab-tested & free from additives. ${product.description.slice(0, 80)}`.slice(0, 160),
     keywords: `${product.name}, organic herbs, USDA organic, Non-GMO, ${product.category}, organic botanicals, Silk Savings`,
     image: product.images[0] ? `https://www.silksavings.shop${product.images[0]}` : undefined,
     canonical: `https://www.silksavings.shop/products/${product.id}`,
+    jsonLd: productSchema,
   });
 
-  const related = products.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 4);
+  const sameCategory = products.filter((p) => p.id !== product.id && p.category === product.category);
+  const otherProducts = products.filter((p) => p.id !== product.id && p.category !== product.category);
+  const related = [...sameCategory, ...otherProducts].slice(0, 4);
+
   const handleCart = () => {
     addToCart(product);
     setCartMsg("Added!");
@@ -226,9 +262,16 @@ export default function ProductDetail() {
       <div className="bg-white border-b border-gray-100 pt-16 md:pt-20 pb-3 px-4">
         <div className="max-w-7xl mx-auto">
           <nav className="text-xs md:text-sm text-gray-400 flex items-center gap-1.5 md:gap-2 font-sans flex-wrap">
-            <Link href="/" className="hover:text-[#2c5530]">Home</Link>
+            <Link href="/" className="hover:text-[#2c5530] transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/products" className="hover:text-[#2c5530]">Products</Link>
+            <Link href="/products" className="hover:text-[#2c5530] transition-colors">Products</Link>
+            <span>/</span>
+            <Link
+              href={`/products?cat=${encodeURIComponent(product.category)}`}
+              className="hover:text-[#2c5530] transition-colors"
+            >
+              {product.category}
+            </Link>
             <span>/</span>
             <span className="text-[#1e3a22] font-medium truncate max-w-40 md:max-w-none">{product.name}</span>
           </nav>
@@ -323,7 +366,12 @@ export default function ProductDetail() {
           {/* RIGHT: Product Info */}
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-2 flex-wrap">
-              <span className="text-[#c9a227] text-xs font-bold uppercase tracking-widest font-sans">{product.category}</span>
+              <Link
+                href={`/products?cat=${encodeURIComponent(product.category)}`}
+                className="text-[#c9a227] hover:text-[#2c5530] transition-colors text-xs font-bold uppercase tracking-widest font-sans"
+              >
+                {product.category}
+              </Link>
               {product.badge && (
                 <span className="bg-[#c9a227] text-[#1e3a22] text-xs font-bold px-3 py-1 rounded-full font-sans">{product.badge}</span>
               )}
@@ -384,6 +432,14 @@ export default function ProductDetail() {
                     <span className="text-gray-700 text-sm font-sans leading-snug">{b}</span>
                   </div>
                 ))}
+              </div>
+              <div className="flex items-center justify-between gap-3 text-xs text-gray-500 font-sans border-t border-[#2c5530]/10 pt-3 mt-3 flex-wrap">
+                <Link href="/returns" className="hover:text-[#2c5530] transition-colors flex items-center gap-1.5 font-medium">
+                  <span className="text-[#2c5530]">📦</span> 30-Day Hassle-Free Returns
+                </Link>
+                <Link href="/contact" className="hover:text-[#2c5530] transition-colors flex items-center gap-1.5 font-medium">
+                  <span className="text-[#2c5530]">💬</span> Questions? Contact Us
+                </Link>
               </div>
             </div>
 
@@ -512,7 +568,7 @@ export default function ProductDetail() {
         {related.length > 0 && (
           <div className="mt-12 md:mt-16">
             <div className="text-center mb-8 md:mb-10">
-              <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">More From This Category</div>
+              <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Recommended Organic Botanicals</div>
               <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22]">You May Also Like</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
