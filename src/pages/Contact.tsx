@@ -1,5 +1,21 @@
 import { useState } from "react";
 import { useSEO } from "@/hooks/useSEO";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const SUBJECT_OPTIONS = [
+  "General Inquiry",
+  "Order Status",
+  "Return or Refund",
+  "Product Question",
+  "Wholesale Inquiry",
+  "Other",
+];
 
 type FormState = { name: string; email: string; subject: string; message: string };
 const EMPTY: FormState = { name: "", email: "", subject: "", message: "" };
@@ -161,20 +177,22 @@ export default function Contact() {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Subject *</label>
-                    <select
+                    <Select
                       required
                       value={form.subject}
-                      onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2c5530] transition-colors bg-white"
+                      onValueChange={(value) => setForm({ ...form, subject: value })}
                     >
-                      <option value="">Select a subject...</option>
-                      <option>General Inquiry</option>
-                      <option>Order Status</option>
-                      <option>Return or Refund</option>
-                      <option>Product Question</option>
-                      <option>Wholesale Inquiry</option>
-                      <option>Other</option>
-                    </select>
+                      <SelectTrigger className="w-full h-auto px-4 py-3 border-2 border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-0 focus:border-[#2c5530] transition-colors bg-white">
+                        <SelectValue placeholder="Select a subject..." />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-[60vh]">
+                        {SUBJECT_OPTIONS.map((option) => (
+                          <SelectItem key={option} value={option} className="text-sm py-2.5">
+                            {option}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">Message *</label>
