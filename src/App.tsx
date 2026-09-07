@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { lazy, Suspense, useEffect } from "react";
+import { Switch, Route, Router as WouterRouter, useLocation, useSearch } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -29,9 +29,19 @@ function PageLoader() {
   );
 }
 
+function ScrollToTop() {
+  const [location] = useLocation();
+  const search = useSearch();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location, search]);
+  return null;
+}
+
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <Navbar />
       <main className="flex-1">
         <Suspense fallback={<PageLoader />}>
