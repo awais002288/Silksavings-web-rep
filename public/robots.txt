@@ -1,2 +1,38 @@
+# robots.txt for Silk Savings (https://www.silksavings.shop)
+
 User-agent: *
 Allow: /
+Allow: /products/
+Allow: /about
+Allow: /contact
+Allow: /returns
+Allow: /privacy
+Allow: /assets/
+
+# Disallow private, cart, and transactional endpoints
+Disallow: /cart
+Disallow: /cart/
+Disallow: /checkout
+Disallow: /checkout/
+Disallow: /api/
+
+# Explicit rules for Googlebot
+User-agent: Googlebot
+Allow: /
+Allow: /products/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /api/
+
+# Explicit rules for Bingbot
+User-agent: Bingbot
+Allow: /
+Allow: /products/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://www.silksavings.shop/sitemap.xml
+Sitemap: https://silksavings.shop/sitemap.xml
+
