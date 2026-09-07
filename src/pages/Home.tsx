@@ -71,9 +71,9 @@ function FeaturedSlider() {
     <section className="py-16 md:py-24 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 md:mb-14">
-          <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Bestsellers</div>
+          <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-2 font-sans">Bestsellers</div>
           <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a22]">Featured Products</h2>
-          <p className="text-gray-500 font-sans mt-2 text-sm md:text-base">Premium organic botanicals — loved by thousands</p>
+          <p className="text-gray-600 font-sans mt-2 text-sm md:text-base">Premium organic botanicals — loved by thousands</p>
         </div>
 
         {/* Slider wrapper — overflow-hidden clips the rail */}
@@ -106,6 +106,8 @@ function FeaturedSlider() {
                         <img
                           src={product.images[0]}
                           alt={product.name}
+                          loading="lazy"
+                          decoding="async"
                           style={{ maxHeight: "200px", width: "auto", maxWidth: "85%", objectFit: "contain" }}
                         />
                       </div>
@@ -114,13 +116,13 @@ function FeaturedSlider() {
                           {product.badge && (
                             <span className="bg-[#c9a227] text-[#1e3a22] text-xs font-bold px-2.5 py-0.5 rounded-full font-sans">{product.badge}</span>
                           )}
-                          <span className="text-[#c9a227] text-xs font-bold uppercase tracking-widest font-sans">{product.category}</span>
+                          <span className="text-[#855f00] text-xs font-bold uppercase tracking-widest font-sans">{product.category}</span>
                         </div>
                         <h3 className="text-xl font-bold text-[#1e3a22] mb-2 leading-tight">{product.name}</h3>
-                        <p className="text-gray-500 text-sm leading-relaxed mb-4 font-sans line-clamp-2">{product.description}</p>
+                        <p className="text-gray-600 text-sm leading-relaxed mb-4 font-sans line-clamp-2">{product.description}</p>
                         <div className="flex items-center gap-4 flex-wrap">
                           <span className="text-2xl font-black text-[#2c5530]">${product.price.toFixed(2)}</span>
-                          <Link href={`/products/${product.id}`} className="bg-[#2c5530] text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-[#1e3a22] transition-all font-sans">
+                          <Link href={`/products/${product.id}`} className="bg-[#2c5530] text-white min-h-[44px] flex items-center px-5 py-2.5 rounded-full font-bold text-sm hover:bg-[#1e3a22] transition-all font-sans">
                             View Product →
                           </Link>
                         </div>
@@ -137,6 +139,8 @@ function FeaturedSlider() {
                         <img
                           src={product.images[0]}
                           alt={product.name}
+                          loading="lazy"
+                          decoding="async"
                           style={{ maxHeight: "300px", maxWidth: "340px", width: "100%", height: "100%", objectFit: "contain" }}
                         />
                       </div>
@@ -146,19 +150,19 @@ function FeaturedSlider() {
                           {product.badge && (
                             <span className="bg-[#c9a227] text-[#1e3a22] text-xs font-bold px-3 py-1 rounded-full font-sans">{product.badge}</span>
                           )}
-                          <span className="text-[#c9a227] text-xs font-bold uppercase tracking-widest font-sans">{product.category}</span>
+                          <span className="text-[#855f00] text-xs font-bold uppercase tracking-widest font-sans">{product.category}</span>
                         </div>
                         <h3 className="text-3xl font-bold text-[#1e3a22] mb-3 leading-tight">{product.name}</h3>
-                        <p className="text-gray-500 text-base leading-relaxed mb-5 font-sans">{product.description}</p>
+                        <p className="text-gray-600 text-base leading-relaxed mb-5 font-sans">{product.description}</p>
                         <div className="flex items-center gap-2 mb-6">
-                          <span className="text-[#c9a227] text-xl">★★★★★</span>
-                          <span className="text-gray-400 text-sm font-sans">Verified Organic · 100% Pure</span>
+                          <span className="text-[#a87a00] text-xl">★★★★★</span>
+                          <span className="text-gray-600 text-sm font-sans">Verified Organic · 100% Pure</span>
                         </div>
                         <div className="flex items-center gap-5">
                           <span className="text-4xl font-black text-[#2c5530]">${product.price.toFixed(2)}</span>
                           <Link
                             href={`/products/${product.id}`}
-                            className="bg-[#2c5530] text-white px-7 py-3.5 rounded-full font-bold text-base hover:bg-[#1e3a22] transition-all shadow-md font-sans"
+                            className="bg-[#2c5530] text-white min-h-[44px] flex items-center px-7 py-3.5 rounded-full font-bold text-base hover:bg-[#1e3a22] transition-all shadow-md font-sans"
                           >
                             View Product →
                           </Link>
@@ -173,22 +177,27 @@ function FeaturedSlider() {
 
           <button
             onClick={() => { prev(); resetTimer(); }}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-[#2c5530] hover:bg-[#f0f7f0] transition-all z-10 font-bold text-2xl"
+            aria-label="Previous product"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 min-w-[44px] min-h-[44px] bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-[#2c5530] hover:bg-[#f0f7f0] transition-all z-10 font-bold text-2xl cursor-pointer"
           >‹</button>
           <button
             onClick={() => { next(); resetTimer(); }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-[#2c5530] hover:bg-[#f0f7f0] transition-all z-10 font-bold text-2xl"
+            aria-label="Next product"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 min-w-[44px] min-h-[44px] bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-[#2c5530] hover:bg-[#f0f7f0] transition-all z-10 font-bold text-2xl cursor-pointer"
           >›</button>
         </div>
 
         {/* Dots */}
-        <div className="flex justify-center gap-2 mt-5">
+        <div className="flex justify-center items-center gap-2 mt-5">
           {featured.map((_, i) => (
             <button
               key={i}
               onClick={() => { goTo(i); resetTimer(); }}
-              className={`rounded-full transition-all duration-300 ${i === current ? "w-7 h-2 bg-[#2c5530]" : "w-2 h-2 bg-gray-300 hover:bg-[#2c5530]/40"}`}
-            />
+              aria-label={`Go to slide ${i + 1}`}
+              className="min-w-[32px] min-h-[32px] flex items-center justify-center cursor-pointer"
+            >
+              <span className={`block rounded-full transition-all duration-300 ${i === current ? "w-7 h-2.5 bg-[#2c5530]" : "w-2.5 h-2.5 bg-gray-300 hover:bg-[#2c5530]/40"}`} />
+            </button>
           ))}
         </div>
 
@@ -222,9 +231,9 @@ function FeaturedSlider() {
 
 export default function Home() {
   useSEO({
-    title: "Silk Savings® | Organic Herbs, Dried Flowers & Seeds — USDA Certified",
-    description: "Shop USDA Organic herbs, dried flowers & seeds. Non-GMO, lab-tested, free from additives. Premium organic botanicals shipped worldwide.",
-    keywords: "organic herbs, USDA organic, dried flowers, organic seeds, Non-GMO, organic botanicals, shilajit resin, apricot seeds, calendula flowers",
+    title: "Silk Savings® | Certified USDA Organic Botanicals & Herbs Online Store",
+    description: "Silk Savings® provides certified USDA Organic botanicals, loose herbs, and rare Himalayan Shilajit. 100% pure, lab-tested, and sustainably wildcrafted.",
+    keywords: "Silk Savings, organic botanicals store, buy USDA organic herbs, online herbal apothecary, pure organic dried botanicals, chemical free herbs",
     canonical: "https://www.silksavings.shop/",
   });
   return (
@@ -240,27 +249,27 @@ export default function Home() {
           }}
         />
         <div className="relative z-10 text-center px-5 max-w-4xl mx-auto">
-          <div className="inline-block border border-[#c9a227]/40 text-[#c9a227] text-xs tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 md:mb-6 font-sans">
-            Silk Savings® — 100% Pure & Organic
+          <div className="inline-block border border-[#c9a227]/50 text-[#c9a227] text-xs tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 md:mb-6 font-sans font-semibold">
+            Silk Savings® — 100% Pure &amp; Organic
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-5 md:mb-6 leading-tight">
-            Nature's Finest,
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-5 md:mb-6 leading-tight font-serif break-words">
+            Nature's Finest Organic Botanicals,
             <br />
             <span className="gold-text">Delivered to You</span>
           </h1>
-          <p className="text-white/70 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed font-sans">
+          <p className="text-white/90 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed font-sans">
             Premium organic herbs, flowers, and seeds — ethically sourced, carefully dried, and tested for purity.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <Link
               href="/products"
-              className="bg-[#c9a227] text-[#1e3a22] px-7 py-3.5 md:py-4 rounded-full font-bold text-base md:text-lg hover:bg-[#e0b730] transition-all hover:-translate-y-1 shadow-lg font-sans"
+              className="bg-[#c9a227] text-[#1e3a22] min-h-[48px] flex items-center justify-center px-7 py-3.5 md:py-4 rounded-full font-bold text-base md:text-lg hover:bg-[#e0b730] transition-all shadow-lg font-sans"
             >
               Explore Products
             </Link>
             <Link
               href="/about"
-              className="border border-white/30 text-white px-7 py-3.5 md:py-4 rounded-full font-semibold text-base md:text-lg hover:border-white/60 hover:bg-white/5 transition-all font-sans"
+              className="border border-white/40 text-white min-h-[48px] flex items-center justify-center px-7 py-3.5 md:py-4 rounded-full font-semibold text-base md:text-lg hover:border-white/80 hover:bg-white/10 transition-all font-sans"
             >
               Our Story
             </Link>
@@ -270,7 +279,7 @@ export default function Home() {
       </section>
 
       {/* Trust badges */}
-      <section className="bg-[hsl(42_30%_97%)] py-5 overflow-x-auto">
+      <section className="bg-[hsl(42_30%_97%)] py-5 overflow-x-auto" style={{ WebkitOverflowScrolling: "touch" }}>
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex items-center justify-start sm:justify-center gap-5 md:gap-10 min-w-max sm:min-w-0">
             {trustBadges.map((b) => (
@@ -288,7 +297,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
             <div>
-              <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-3 font-sans">Our Story</div>
+              <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-3 font-sans">Our Story</div>
               <h2 className="text-3xl md:text-5xl font-bold text-[#1e3a22] mb-5 md:mb-6 leading-tight">
                 Rooted in Nature,
                 <br />Built on Trust
@@ -302,7 +311,7 @@ export default function Home() {
               </p>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 text-[#2c5530] font-bold border-b-2 border-[#c9a227] pb-1 hover:text-[#c9a227] transition-colors font-sans"
+                className="inline-flex items-center gap-2 text-[#1e3a22] font-bold border-b-2 border-[#855f00] pb-1 hover:text-[#855f00] transition-colors font-sans"
               >
                 Read Our Full Story →
               </Link>
@@ -310,18 +319,18 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-3 md:gap-4">
               <div className="space-y-3 md:space-y-4">
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-36 md:h-48">
-                  <img src={getProductById("dried-calendula-flowers")!.images[1] ?? getProductById("dried-calendula-flowers")!.images[0]} alt="Calendula benefits" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("dried-calendula-flowers")!.images[1] ?? getProductById("dried-calendula-flowers")!.images[0]} alt="Calendula benefits" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-48 md:h-64">
-                  <img src={getProductById("dried-rose-petals")!.images[1] ?? getProductById("dried-rose-petals")!.images[0]} alt="Rose petal tea" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("dried-rose-petals")!.images[1] ?? getProductById("dried-rose-petals")!.images[0]} alt="Rose petal tea" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
                 </div>
               </div>
               <div className="space-y-3 md:space-y-4 pt-6 md:pt-8">
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-48 md:h-64">
-                  <img src={getProductById("bitter-apricot-seeds-8oz")!.images[0]} alt="Apricot seeds" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("bitter-apricot-seeds-8oz")!.images[0]} alt="Apricot seeds" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-36 md:h-48">
-                  <img src={getProductById("dried-lemon-grass")!.images[0]} alt="Lemon grass" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("dried-lemon-grass")!.images[0]} alt="Lemon grass" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
                 </div>
               </div>
             </div>
@@ -333,14 +342,14 @@ export default function Home() {
       <section className="py-16 md:py-20 px-4 bg-[#f5f0e8]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 md:mb-14">
-            <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Our Collection</div>
+            <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-2 font-sans">Our Collection</div>
             <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a22]">Shop by Category</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
             {shopCategories.map((cat) => (
               <Link key={cat.name} href={cat.href}>
                 <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 group cursor-pointer">
-                  {/* Image fills the space nicely — small padding so image is prominent */}
+                  {/* Image fills the space nicely */}
                   <div
                     className="flex items-center justify-center overflow-hidden"
                     style={{ height: "260px", background: cat.bg }}
@@ -348,6 +357,8 @@ export default function Home() {
                     <img
                       src={cat.image}
                       alt={cat.name}
+                      loading="lazy"
+                      decoding="async"
                       className="group-hover:scale-105 transition-transform duration-500"
                       style={{
                         height: "100%",
@@ -360,7 +371,7 @@ export default function Home() {
                   {/* Text section */}
                   <div className="px-5 py-4 bg-[#1e3a22]">
                     <h3 className="text-white font-bold text-lg mb-0.5">{cat.name}</h3>
-                    <p className="text-white/55 text-sm mb-3 font-sans">{cat.desc}</p>
+                    <p className="text-white/80 text-sm mb-3 font-sans">{cat.desc}</p>
                     <span className="text-[#c9a227] text-sm font-semibold font-sans inline-flex items-center gap-2">
                       Shop Now <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
                     </span>
@@ -379,7 +390,7 @@ export default function Home() {
       <section className="py-16 md:py-20 px-4 bg-[#1e3a22] text-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 md:mb-14">
-            <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Why Us</div>
+            <div className="text-[#c9a227] text-xs tracking-widest uppercase font-bold mb-2 font-sans">Why Us</div>
             <h2 className="text-3xl md:text-4xl font-bold">The Silk Savings Difference</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
@@ -392,7 +403,7 @@ export default function Home() {
               <div key={item.title} className="text-center">
                 <div className="text-4xl md:text-5xl mb-3 md:mb-4">{item.icon}</div>
                 <h3 className="font-bold text-[#c9a227] text-base md:text-lg mb-2 md:mb-3">{item.title}</h3>
-                <p className="text-white/60 text-xs md:text-sm leading-relaxed font-sans">{item.desc}</p>
+                <p className="text-white/85 text-xs md:text-sm leading-relaxed font-sans">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -403,7 +414,7 @@ export default function Home() {
       <section className="py-16 md:py-20 px-4 bg-[hsl(42_30%_97%)]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 md:mb-14">
-            <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Happy Customers</div>
+            <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-2 font-sans">Happy Customers</div>
             <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a22]">What Our Customers Say</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
@@ -417,17 +428,17 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="font-bold text-[#1e3a22] text-sm">{rev.name}</p>
-                        <p className="text-gray-400 text-xs font-sans">{rev.location}</p>
+                        <p className="text-gray-500 text-xs font-sans">{rev.location}</p>
                       </div>
                     </div>
-                    <span className="text-gray-400 text-xs font-sans flex-shrink-0">{rev.date}</span>
+                    <span className="text-gray-500 text-xs font-sans flex-shrink-0">{rev.date}</span>
                   </div>
                   <StarRating rating={rev.rating} />
                   <h4 className="font-bold text-[#1e3a22] text-sm">{rev.title}</h4>
                   <p className="text-gray-600 text-sm leading-relaxed font-sans flex-1">"{rev.body}"</p>
-                  <div className="pt-2 border-t border-gray-50 flex items-center justify-between">
-                    <span className="text-green-600 text-xs font-semibold font-sans">✓ Verified Purchase</span>
-                    <span className="text-[#c9a227] text-xs font-sans truncate max-w-28">{rev.productName.split(" ").slice(0, 3).join(" ")}</span>
+                  <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+                    <span className="text-green-700 text-xs font-semibold font-sans">✓ Verified Purchase</span>
+                    <span className="text-[#855f00] text-xs font-semibold font-sans truncate max-w-28">{rev.productName.split(" ").slice(0, 3).join(" ")}</span>
                   </div>
                 </div>
               </Link>
@@ -442,12 +453,12 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a22] mb-4">
             Ready to Experience the Difference?
           </h2>
-          <p className="text-gray-600 text-base md:text-lg mb-7 font-sans">
+          <p className="text-gray-700 text-base md:text-lg mb-7 font-sans">
             Browse our full collection of premium organic botanicals.
           </p>
           <Link
             href="/products"
-            className="inline-block bg-[#c9a227] text-[#1e3a22] px-8 md:px-10 py-4 rounded-full font-bold text-base md:text-lg hover:bg-[#e0b730] transition-all hover:-translate-y-1 shadow-lg font-sans"
+            className="inline-block bg-[#c9a227] text-[#1e3a22] min-h-[48px] px-8 md:px-10 py-4 rounded-full font-bold text-base md:text-lg hover:bg-[#e0b730] transition-all shadow-lg font-sans"
           >
             Shop All Products
           </Link>

@@ -169,7 +169,6 @@ export default function ChatWidget() {
   const [leadInterest, setLeadInterest] = useState("");
   const [leadSent, setLeadSent] = useState(false);
   const [greeted, setGreeted] = useState(false);
-  const [pulse, setPulse] = useState(false);
   const [unread, setUnread] = useState(0);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -179,7 +178,6 @@ export default function ChatWidget() {
     const t = setTimeout(() => {
       if (!greeted) {
         setGreeted(true);
-        setPulse(true);
         setUnread(1);
         setMessages([
           {
@@ -198,14 +196,6 @@ export default function ChatWidget() {
     }, 2000);
     return () => clearTimeout(t);
   }, [greeted]);
-
-  // Stop pulse after 6 seconds
-  useEffect(() => {
-    if (pulse) {
-      const t = setTimeout(() => setPulse(false), 6000);
-      return () => clearTimeout(t);
-    }
-  }, [pulse]);
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -377,9 +367,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Open chat"
-        className={`fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#2c5530] text-white shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-[#1e3a22] hover:scale-110 ${
-          pulse ? "animate-bounce" : ""
-        }`}
+        className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#2c5530] text-white shadow-2xl flex items-center justify-center transition-all duration-300 hover:bg-[#1e3a22] hover:scale-105"
       >
         {open ? (
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-6 h-6">

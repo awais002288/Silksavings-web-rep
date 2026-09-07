@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link, useParams } from "wouter";
-import { getProductById, products } from "@/data/products";
+import { getProductById, products, BROAD_CATEGORY_KEYWORDS } from "@/data/products";
 import { useSEO } from "@/hooks/useSEO";
 import { useCart } from "@/lib/cartContext";
 import { generateProductJsonLd } from "@/lib/schema";
@@ -15,6 +15,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 
 const CERTIFICATIONS = [
   { key: "halal", label: "Halal Certification", image: halalCertification },
@@ -30,7 +36,7 @@ function CertificationsSection() {
   return (
     <div className="mt-12 md:mt-16">
       <div className="text-center mb-8 md:mb-10">
-        <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">
+        <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-2 font-sans">
           Verified Quality
         </div>
         <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22]">Certifications</h2>
@@ -41,7 +47,7 @@ function CertificationsSection() {
             key={cert.key}
             type="button"
             onClick={() => setActiveCert(cert.key)}
-            className="px-3 py-3 rounded-xl border border-gray-200 bg-white text-[#1e3a22] hover:border-[#c9a227] hover:text-[#c9a227] hover:shadow-md transition-all text-xs md:text-sm font-semibold font-sans text-center cursor-pointer active:scale-95"
+            className="px-3 py-3 min-h-[44px] flex items-center justify-center rounded-xl border border-gray-200 bg-white text-[#1e3a22] hover:border-[#855f00] hover:text-[#855f00] hover:shadow-md transition-all text-xs md:text-sm font-semibold font-sans text-center cursor-pointer active:scale-95"
           >
             {cert.label}
           </button>
@@ -54,7 +60,7 @@ function CertificationsSection() {
             <DialogTitle className="text-lg md:text-xl font-bold text-[#1e3a22] font-sans">
               {active?.label}
             </DialogTitle>
-            <DialogDescription className="text-xs text-[#c9a227] font-semibold uppercase tracking-wider font-sans">
+            <DialogDescription className="text-xs text-[#855f00] font-semibold uppercase tracking-wider font-sans">
               Silk Savings® 100% Pure & Organic Quality Verification
             </DialogDescription>
           </DialogHeader>
@@ -69,7 +75,7 @@ function CertificationsSection() {
             </div>
           )}
 
-          <div className="mt-2 flex items-center justify-between pt-2 border-t border-gray-100 text-xs text-gray-500 font-sans">
+          <div className="mt-2 flex items-center justify-between pt-2 border-t border-gray-100 text-xs text-gray-600 font-sans">
             <span>Silk Savings® Verified Document</span>
             {active && (
               <a
@@ -92,7 +98,7 @@ function StarRating({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5">
       {Array(5).fill(0).map((_, i) => (
-        <span key={i} className={i < rating ? "text-[#c9a227]" : "text-gray-200"}>★</span>
+        <span key={i} className={i < rating ? "text-[#a87a00]" : "text-gray-300"}>★</span>
       ))}
     </div>
   );
@@ -207,12 +213,34 @@ export default function ProductDetail() {
     return <ProductNotFound />;
   }
 
-  const productSchema = useMemo(() => generateProductJsonLd(product), [product]);
+  const productFaqs = useMemo(
+    () => [
+      {
+        question: `How should I store ${product.name} for maximum potency?`,
+        answer: `Store ${product.name} in its original resealable, UV-protective pouch or an airtight container in a cool, dry pantry away from direct sunlight. Under optimal conditions, it retains maximum aroma, flavor, and botanical potency for up to 24 months.`,
+      },
+      {
+        question: `What certifications and third-party lab tests verify this product?`,
+        answer: `Silk Savings ${product.name} is USDA Certified Organic, Non-GMO Project verified, and Halal certified. Every harvest undergoes comprehensive third-party ISO-17025 accredited laboratory testing for heavy metals, microbial safety, and purity.`,
+      },
+      {
+        question: `What is the recommended daily usage and preparation method?`,
+        answer: `${product.usage} Always consult with a qualified healthcare professional before beginning any new herbal regimen if you are pregnant, nursing, taking medications, or have a pre-existing medical condition.`,
+      },
+      {
+        question: `What are the delivery times and 30-day guarantee?`,
+        answer: `Orders are packed in protective eco-friendly packaging and dispatched promptly with live tracking. Orders over $50 receive Free Worldwide Shipping. Every purchase is backed by our 30-Day Money-Back Guarantee.`,
+      },
+    ],
+    [product]
+  );
+
+  const productSchema = useMemo(() => generateProductJsonLd(product, productFaqs), [product, productFaqs]);
 
   useSEO({
-    title: `${product.name} | USDA Organic — Silk Savings®`,
-    description: `Buy ${product.name} — USDA Organic, Non-GMO, lab-tested & free from additives. ${product.description.slice(0, 80)}`.slice(0, 160),
-    keywords: `${product.name}, organic herbs, USDA organic, Non-GMO, ${product.category}, organic botanicals, Silk Savings`,
+    title: `Buy ${product.name}${product.weight ? ` (${product.weight})` : ""} — USDA Organic | Silk Savings®`,
+    description: `Buy ${product.name} — USDA Organic, Non-GMO, lab-tested & free from additives. ${product.benefits.slice(0, 2).join(". ")}. In stock with fast worldwide shipping.`.slice(0, 160),
+    keywords: `${product.name}, buy ${product.name.toLowerCase()}, organic ${product.category.toLowerCase()}, ${BROAD_CATEGORY_KEYWORDS[product.category] || ""}, USDA organic botanicals, Silk Savings`,
     image: product.images[0] ? `https://www.silksavings.shop${product.images[0]}` : undefined,
     canonical: `https://www.silksavings.shop/products/${product.id}`,
     jsonLd: productSchema,
@@ -261,7 +289,7 @@ export default function ProductDetail() {
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-100 pt-16 md:pt-20 pb-3 px-4">
         <div className="max-w-7xl mx-auto">
-          <nav className="text-xs md:text-sm text-gray-400 flex items-center gap-1.5 md:gap-2 font-sans flex-wrap">
+          <nav className="text-xs md:text-sm text-gray-600 flex items-center gap-1.5 md:gap-2 font-sans flex-wrap">
             <Link href="/" className="hover:text-[#2c5530] transition-colors">Home</Link>
             <span>/</span>
             <Link href="/products" className="hover:text-[#2c5530] transition-colors">Products</Link>
@@ -273,7 +301,7 @@ export default function ProductDetail() {
               {product.category}
             </Link>
             <span>/</span>
-            <span className="text-[#1e3a22] font-medium truncate max-w-40 md:max-w-none">{product.name}</span>
+            <span className="text-[#1e3a22] font-semibold truncate max-w-40 md:max-w-none">{product.name}</span>
           </nav>
         </div>
       </div>
@@ -298,7 +326,8 @@ export default function ProductDetail() {
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`w-14 h-14 md:w-20 md:h-20 rounded-xl border-2 transition-all bg-white flex items-center justify-center flex-shrink-0 ${
+                    aria-label={`View image ${i + 1}`}
+                    className={`w-14 h-14 md:w-20 md:h-20 min-w-[48px] min-h-[48px] rounded-xl border-2 transition-all bg-white flex items-center justify-center flex-shrink-0 cursor-pointer ${
                       activeImage === i ? "border-[#2c5530] shadow-md ring-2 ring-[#2c5530]/20" : "border-gray-200 hover:border-[#2c5530]/50"
                     }`}
                   >
@@ -365,32 +394,40 @@ export default function ProductDetail() {
 
           {/* RIGHT: Product Info */}
           <div className="flex flex-col">
-            <div className="flex items-center gap-3 mb-2 flex-wrap">
+            <div className="flex items-center gap-2 md:gap-3 mb-2 flex-wrap text-xs">
               <Link
                 href={`/products?cat=${encodeURIComponent(product.category)}`}
-                className="text-[#c9a227] hover:text-[#2c5530] transition-colors text-xs font-bold uppercase tracking-widest font-sans"
+                className="text-[#855f00] hover:text-[#1e3a22] transition-colors font-bold uppercase tracking-widest font-sans"
               >
                 {product.category}
               </Link>
               {product.badge && (
-                <span className="bg-[#c9a227] text-[#1e3a22] text-xs font-bold px-3 py-1 rounded-full font-sans">{product.badge}</span>
+                <span className="bg-[#c9a227] text-[#1e3a22] font-bold px-3 py-1 rounded-full font-sans">{product.badge}</span>
               )}
+              <span className="text-gray-300 hidden sm:inline">•</span>
+              <span className="text-gray-600 font-sans">
+                Brand: <strong className="text-gray-800 font-semibold">{product.brand || "Silk Savings®"}</strong>
+              </span>
+              <span className="text-gray-300">•</span>
+              <span className="text-gray-600 font-sans">
+                SKU: <span className="font-mono text-gray-700">{product.sku || product.id}</span>
+              </span>
             </div>
 
-            <h1 className="text-2xl md:text-4xl font-bold text-[#1e3a22] mb-3 leading-tight">{product.name}</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-[#1e3a22] mb-3 leading-tight font-serif">{product.name}</h1>
 
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <StarRating rating={avgRating} />
-              <span className="text-gray-400 text-sm font-sans">({product.reviews?.length ?? 0} reviews)</span>
+              <span className="text-gray-600 text-sm font-sans font-medium">({product.reviews?.length ?? 0} reviews)</span>
               {product.weight && (
-                <span className="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full font-sans font-medium">{product.weight}</span>
+                <span className="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full font-sans font-medium">{product.weight}</span>
               )}
             </div>
 
             <div className="flex items-baseline gap-3 mb-5 flex-wrap">
               <span className="text-4xl md:text-5xl font-black text-[#2c5530]">${product.price.toFixed(2)}</span>
-              <span className="text-gray-400 text-sm line-through font-sans">${(product.price * 1.2).toFixed(2)}</span>
-              <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded-full font-sans">Save 17%</span>
+              <span className="text-gray-500 text-sm line-through font-sans">${(product.price * 1.2).toFixed(2)}</span>
+              <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full font-sans">Save 17%</span>
             </div>
 
             <p className="text-gray-600 leading-relaxed mb-5 text-sm md:text-base font-sans">{product.longDescription}</p>
@@ -400,13 +437,13 @@ export default function ProductDetail() {
               <button
                 onClick={handleBuyNow}
                 disabled={checkoutLoading}
-                className="flex-1 bg-[#2c5530] text-white text-center py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-[#1e3a22] transition-all shadow-md font-sans disabled:opacity-60 disabled:cursor-not-allowed"
+                className="flex-1 min-h-[48px] bg-[#2c5530] text-white text-center py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-[#1e3a22] transition-all shadow-md font-sans disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
               >
                 {checkoutLoading ? "Redirecting…" : "🛒 Buy Now — Secure Checkout"}
               </button>
               <button
                 onClick={handleCart}
-                className={`flex-1 border-2 border-[#2c5530] text-center py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base transition-all font-sans ${
+                className={`flex-1 min-h-[48px] border-2 border-[#2c5530] text-center py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base transition-all font-sans flex items-center justify-center cursor-pointer ${
                   cartMsg
                     ? "bg-[#2c5530] text-white border-[#2c5530]"
                     : "text-[#2c5530] hover:bg-[#f0f7f0]"
@@ -475,8 +512,8 @@ export default function ProductDetail() {
         {product.nutritionFacts && (
           <div className="mt-12 md:mt-16">
             <div className="text-center mb-8 md:mb-10">
-              <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Label Info</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22]">Nutrition Facts</h2>
+              <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-2 font-sans">Label Info</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22] font-serif">Nutrition Facts</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
               <NutritionLabel facts={product.nutritionFacts} />
@@ -493,7 +530,7 @@ export default function ProductDetail() {
                     ].map(([label, value]) => (
                       <div key={label} className="flex gap-3 text-sm font-sans">
                         <span className="font-semibold text-[#1e3a22] w-24 md:w-28 flex-shrink-0">{label}</span>
-                        <span className="text-gray-500">{value}</span>
+                        <span className="text-gray-700">{value}</span>
                       </div>
                     ))}
                   </div>
@@ -506,22 +543,121 @@ export default function ProductDetail() {
         {/* ═══ CERTIFICATIONS ═══ */}
         <CertificationsSection />
 
+        {/* ═══ THE SILK SAVINGS DIFFERENCE (COMPARISON TABLE) ═══ */}
+        <div className="mt-12 md:mt-16 bg-white rounded-2xl md:rounded-3xl p-5 sm:p-6 md:p-10 border border-gray-100 shadow-sm">
+          <div className="text-center mb-6 md:mb-8">
+            <span className="text-[#855f00] text-xs tracking-widest uppercase font-bold font-sans">Purity Comparison</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22] mt-1 font-serif">The Silk Savings® Difference</h2>
+            <p className="text-gray-600 text-sm max-w-xl mx-auto font-sans mt-2">See how our USDA Organic whole botanicals compare to conventional mass-market brands.</p>
+          </div>
+
+          <p className="text-[11px] text-gray-500 md:hidden mb-2 text-center font-sans">← Swipe table horizontally to compare features →</p>
+          <div className="overflow-x-auto pb-2" style={{ WebkitOverflowScrolling: "touch" }}>
+            <table className="w-full text-left text-sm font-sans border-collapse min-w-[500px]">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="py-3.5 px-4 font-semibold text-gray-700 w-1/3">Feature</th>
+                  <th className="py-3.5 px-4 font-bold text-[#2c5530] bg-[#f0f7f0] rounded-t-xl w-1/3">Silk Savings® Standard</th>
+                  <th className="py-3.5 px-4 font-semibold text-gray-700 w-1/3">Conventional Store Brands</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                <tr>
+                  <td className="py-3.5 px-4 font-medium text-gray-900">Organic Certification</td>
+                  <td className="py-3.5 px-4 text-[#2c5530] bg-[#f0f7f0] font-semibold">✓ 100% USDA Certified Organic</td>
+                  <td className="py-3.5 px-4 text-gray-700">✗ Often conventional / unverified</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium text-gray-900">Botanical Quality &amp; Cut</td>
+                  <td className="py-3.5 px-4 text-[#2c5530] bg-[#f0f7f0] font-semibold">✓ Whole select cuts &amp; pure whole forms</td>
+                  <td className="py-3.5 px-4 text-gray-700">✗ Crushed dust, fannings &amp; high stems</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium text-gray-900">Additives &amp; Preservatives</td>
+                  <td className="py-3.5 px-4 text-[#2c5530] bg-[#f0f7f0] font-semibold">✓ Zero sulfites, fillers, or additives</td>
+                  <td className="py-3.5 px-4 text-gray-700">✗ Commonly irradiated or sulfur-treated</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium text-gray-900">Laboratory Verification</td>
+                  <td className="py-3.5 px-4 text-[#2c5530] bg-[#f0f7f0] font-semibold">✓ ISO-17025 third-party batch COA</td>
+                  <td className="py-3.5 px-4 text-gray-700">✗ Seldom tested for heavy metals</td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 font-medium text-gray-900">Packaging Freshness</td>
+                  <td className="py-3.5 px-4 text-[#2c5530] bg-[#f0f7f0] font-semibold rounded-b-xl">✓ Multi-barrier UV airtight pouch</td>
+                  <td className="py-3.5 px-4 text-gray-700">✗ Clear plastic susceptible to UV decay</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* ═══ PRODUCT FAQS ACCORDION ═══ */}
+        <div className="mt-12 md:mt-16 max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="text-[#855f00] text-xs tracking-widest uppercase font-bold font-sans">Common Questions</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22] mt-1 font-serif">Frequently Asked Questions</h2>
+            <p className="text-gray-600 text-sm font-sans mt-2">Everything you need to know about {product.name}.</p>
+          </div>
+
+          <Accordion type="single" collapsible className="w-full bg-white rounded-2xl p-4 md:p-6 border border-gray-100 shadow-sm">
+            {productFaqs.map((faq, index) => (
+              <AccordionItem key={index} value={`faq-${index}`} className="border-b border-gray-100 last:border-b-0">
+                <AccordionTrigger className="text-[#1e3a22] hover:text-[#2c5530] font-semibold text-left text-sm md:text-base py-4 font-sans cursor-pointer min-h-[48px]">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-600 text-sm leading-relaxed font-sans pb-4">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+
+        {/* ═══ SHIPPING, PACKAGING & ASSURANCE ═══ */}
+        <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center flex flex-col items-center">
+            <div className="w-12 h-12 rounded-full bg-[#f0f7f0] flex items-center justify-center text-[#2c5530] text-2xl mb-3">
+              📦
+            </div>
+            <h4 className="font-bold text-[#1e3a22] text-base mb-1 font-sans">Free Worldwide Shipping</h4>
+            <p className="text-gray-600 text-xs leading-relaxed font-sans">Orders over $50 qualify for fast, tracked international dispatch directly to your doorstep.</p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center flex flex-col items-center">
+            <div className="w-12 h-12 rounded-full bg-[#f0f7f0] flex items-center justify-center text-[#2c5530] text-2xl mb-3">
+              🛡️
+            </div>
+            <h4 className="font-bold text-[#1e3a22] text-base mb-1 font-sans">30-Day Money-Back Guarantee</h4>
+            <p className="text-gray-600 text-xs leading-relaxed font-sans">Try our botanicals with complete confidence. If you are not 100% satisfied, return for a prompt refund.</p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center flex flex-col items-center">
+            <div className="w-12 h-12 rounded-full bg-[#f0f7f0] flex items-center justify-center text-[#2c5530] text-2xl mb-3">
+              🌿
+            </div>
+            <h4 className="font-bold text-[#1e3a22] text-base mb-1 font-sans">Guaranteed Lab Purity</h4>
+            <p className="text-gray-600 text-xs leading-relaxed font-sans">Certified USDA Organic, Non-GMO Project verified, and batch-tested for heavy metals and purity.</p>
+          </div>
+        </div>
+
         {/* ═══ GALLERY ═══ */}
         {product.images.length > 1 && (
           <div className="mt-12 md:mt-16">
             <div className="text-center mb-7 md:mb-8">
-              <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Gallery</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22]">Product Images</h2>
+              <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-2 font-sans">Gallery</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22] font-serif">Product Images</h2>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
               {product.images.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => { setActiveImage(i); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                  className={`bg-white rounded-xl md:rounded-2xl border-2 transition-all hover:shadow-lg overflow-hidden ${activeImage === i ? "border-[#2c5530] shadow-md" : "border-gray-100 hover:border-[#2c5530]/40"}`}
+                  aria-label={`Select product image ${i + 1}`}
+                  className={`bg-white rounded-xl md:rounded-2xl border-2 transition-all hover:shadow-lg overflow-hidden min-h-[48px] min-w-[48px] cursor-pointer ${activeImage === i ? "border-[#2c5530] shadow-md" : "border-gray-100 hover:border-[#2c5530]/40"}`}
                   style={{ aspectRatio: "1" }}
                 >
-                  <img src={img} alt={`${product.name} ${i + 1}`} className="w-full h-full object-contain p-3 md:p-4" />
+                  <img src={img} alt={`${product.name} ${i + 1}`} loading="lazy" decoding="async" className="w-full h-full object-contain p-3 md:p-4" />
                 </button>
               ))}
             </div>
@@ -532,11 +668,11 @@ export default function ProductDetail() {
         {product.reviews && product.reviews.length > 0 && (
           <div className="mt-12 md:mt-16">
             <div className="text-center mb-8 md:mb-10">
-              <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">What Customers Say</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22]">Customer Reviews</h2>
+              <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-2 font-sans">What Customers Say</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22] font-serif">Customer Reviews</h2>
               <div className="flex items-center justify-center gap-2 mt-3">
                 <StarRating rating={avgRating} />
-                <span className="text-gray-600 font-sans text-sm">{avgRating}.0 / 5 — {product.reviews.length} verified reviews</span>
+                <span className="text-gray-700 font-sans text-sm font-medium">{avgRating}.0 / 5 — {product.reviews.length} verified reviews</span>
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -547,16 +683,16 @@ export default function ProductDetail() {
                       <div className="w-9 h-9 rounded-full bg-[#2c5530] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">{rev.avatar}</div>
                       <div>
                         <p className="font-bold text-[#1e3a22] text-sm">{rev.name}</p>
-                        <p className="text-gray-400 text-xs font-sans">{rev.location}</p>
+                        <p className="text-gray-500 text-xs font-sans">{rev.location}</p>
                       </div>
                     </div>
-                    <span className="text-gray-400 text-xs font-sans flex-shrink-0">{rev.date}</span>
+                    <span className="text-gray-500 text-xs font-sans flex-shrink-0">{rev.date}</span>
                   </div>
                   <StarRating rating={rev.rating} />
                   <h4 className="font-bold text-[#1e3a22] text-sm">{rev.title}</h4>
                   <p className="text-gray-600 text-sm leading-relaxed font-sans flex-1">"{rev.body}"</p>
-                  <div className="flex items-center gap-1 pt-2 border-t border-gray-50">
-                    <span className="text-green-600 text-xs font-semibold font-sans">✓ Verified Purchase</span>
+                  <div className="flex items-center gap-1 pt-2 border-t border-gray-100">
+                    <span className="text-green-700 text-xs font-semibold font-sans">✓ Verified Purchase</span>
                   </div>
                 </div>
               ))}
@@ -568,20 +704,20 @@ export default function ProductDetail() {
         {related.length > 0 && (
           <div className="mt-12 md:mt-16">
             <div className="text-center mb-8 md:mb-10">
-              <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Recommended Organic Botanicals</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22]">You May Also Like</h2>
+              <div className="text-[#855f00] text-xs tracking-widest uppercase font-bold mb-2 font-sans">Recommended Organic Botanicals</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22] font-serif">You May Also Like</h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
               {related.map((p) => (
                 <Link key={p.id} href={`/products/${p.id}`}>
-                  <div className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group border border-gray-100 flex flex-col h-full">
+                  <div className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 group border border-gray-100 flex flex-col h-full cursor-pointer">
                     <div className="bg-white flex items-center justify-center" style={{ height: "140px" }}>
-                      <img src={p.images[0]} alt={p.name} className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500" />
+                      <img src={p.images[0]} alt={p.name} loading="lazy" decoding="async" className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <div className="p-3 md:p-4 border-t border-gray-50 flex flex-col flex-1">
-                      <p className="text-[#c9a227] text-xs font-semibold uppercase tracking-wide mb-1 font-sans">{p.category}</p>
+                      <p className="text-[#855f00] text-xs font-bold uppercase tracking-wide mb-1 font-sans">{p.category}</p>
                       <h3 className="font-bold text-[#1e3a22] text-xs md:text-sm mb-2 leading-snug flex-1">{p.name}</h3>
-                      <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-50">
+                      <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-100">
                         <span className="text-[#2c5530] font-bold font-sans text-sm">${p.price.toFixed(2)}</span>
                         <span className="text-xs text-[#2c5530] font-semibold font-sans">View →</span>
                       </div>

@@ -48,15 +48,16 @@ export function generateProductSchema(product: Product): Record<string, any> {
     "@type": "Product",
     "@id": `${canonicalUrl}#product`,
     name: product.name,
-    description: product.description,
+    description: product.longDescription || product.description,
     image: images.length > 0 ? images : [toAbsoluteUrl("/favicon.png")],
-    sku: product.id,
-    mpn: product.id,
+    sku: product.sku || product.id,
+    mpn: product.mpn || product.sku || product.id,
     category: product.category,
     brand: {
       "@type": "Brand",
-      name: "Silk Savings®",
+      name: product.brand || "Silk Savings®",
     },
+    ...(product.gtin ? { gtin12: product.gtin } : {}),
     offers: {
       "@type": "Offer",
       "@id": `${canonicalUrl}#offer`,
@@ -145,14 +146,98 @@ export function generateProductBreadcrumbs(product: Product): Record<string, any
 }
 
 /**
- * Generates full JSON-LD graph with Product and Breadcrumbs schemas
+ * Generates Schema.org BreadcrumbList for Collection / Category pages
  */
-export function generateProductJsonLd(product: Product): Record<string, any> {
+export function generateCategoryBreadcrumbs(category?: string): Record<string, any> {
+  const isCategory = Boolean(category && category !== "All");
+  const canonicalUrl = `${SITE_URL}/products${isCategory ? `?cat=${encodeURIComponent(category!)}` : ""}`;
+  
+  const items = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: SITE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Products",
+      item: `${SITE_URL}/products`,
+    },
+  ];
+
+  if (isCategory) {
+    items.push({
+      "@type": "ListItem",
+      position: 3,
+      name: category!,
+      item: canonicalUrl,
+    });
+  }
+
+  return {
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
+    itemListElement: items,
+  };
+}
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+/**
+ * Generates Schema.org FAQPage structured data
+ */
+export function generateFaqSchema(faqs: FAQItem[], pageUrl: string): Record<string, any> {
+  return {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+/**
+ * Generates full JSON-LD graph with Product, Breadcrumbs, and FAQ schemas
+ */
+export function generateProductJsonLd(product: Product, faqs?: FAQItem[]): Record<string, any> {
+  const canonicalUrl = `${SITE_URL}/products/${product.id}`;
+  const graph: any[] = [
+    generateProductSchema(product),
+    generateProductBreadcrumbs(product),
+  ];
+  if (faqs && faqs.length > 0) {
+    graph.push(generateFaqSchema(faqs, canonicalUrl));
+  }
   return {
     "@context": "https://schema.org",
-    "@graph": [
-      generateProductSchema(product),
-      generateProductBreadcrumbs(product),
-    ],
+    "@graph": graph,
+  };
+}
+
+/**
+ * Generates JSON-LD graph for Collection / Category pages with Breadcrumbs and FAQ schemas
+ */
+export function generateCategoryJsonLd(category?: string, faqs?: FAQItem[]): Record<string, any> {
+  const isCategory = Boolean(category && category !== "All");
+  const canonicalUrl = `${SITE_URL}/products${isCategory ? `?cat=${encodeURIComponent(category!)}` : ""}`;
+  const graph: any[] = [
+    generateCategoryBreadcrumbs(category),
+  ];
+  if (faqs && faqs.length > 0) {
+    graph.push(generateFaqSchema(faqs, canonicalUrl));
+  }
+  return {
+    "@context": "https://schema.org",
+    "@graph": graph,
   };
 }

@@ -47,6 +47,10 @@ export interface Product {
   badge?: string;
   category: string;
   weight?: string;
+  sku?: string;
+  mpn?: string;
+  brand?: string;
+  gtin?: string;
   nutritionFacts?: NutritionFacts;
   prepSteps?: PrepStep[];
   reviews?: Review[];
@@ -96,6 +100,9 @@ export const products: Product[] = [
     badge: "Best Seller",
     category: "Flowers",
     weight: "4 oz",
+    sku: "SS-CAL-4OZ",
+    mpn: "SS-CAL-4OZ",
+    brand: "Silk Savings®",
     prepSteps: teaPrepSteps,
     nutritionFacts: {
       servingSize: "1 tsp (2g)",
@@ -163,6 +170,9 @@ export const products: Product[] = [
     badge: "Popular",
     category: "Seeds & Kernels",
     weight: "8 oz",
+    sku: "SS-APR-8OZ",
+    mpn: "SS-APR-8OZ",
+    brand: "Silk Savings®",
     prepSteps: seedPrepSteps,
     nutritionFacts: {
       servingSize: "3 kernels (1g)",
@@ -219,6 +229,9 @@ export const products: Product[] = [
     badge: "Best Value",
     category: "Seeds & Kernels",
     weight: "1 lb",
+    sku: "SS-APR-16OZ",
+    mpn: "SS-APR-16OZ",
+    brand: "Silk Savings®",
     prepSteps: seedPrepSteps,
     nutritionFacts: {
       servingSize: "3 kernels (1g)",
@@ -266,6 +279,9 @@ export const products: Product[] = [
     badge: "Fan Favorite",
     category: "Flowers",
     weight: "1 oz",
+    sku: "SS-ROSE-1OZ",
+    mpn: "SS-ROSE-1OZ",
+    brand: "Silk Savings®",
     prepSteps: [
       { icon: "📏", label: "Measure", detail: "1 tsp of rose petals" },
       { icon: "🌡️", label: "Heat Water", detail: "Bring to 195°F (just below boiling)" },
@@ -328,6 +344,9 @@ export const products: Product[] = [
     images: withPrimary(imagesForFolder("Yarrowherb"), "Yarrow-Herbs"),
     category: "Herbs & Leaves",
     weight: "4 oz",
+    sku: "SS-YAR-4OZ",
+    mpn: "SS-YAR-4OZ",
+    brand: "Silk Savings®",
     prepSteps: teaPrepSteps,
     nutritionFacts: {
       servingSize: "1 tsp (2g)",
@@ -376,6 +395,9 @@ export const products: Product[] = [
     images: withPrimary(imagesForFolder("Lemongrass"), "lemon-grass"),
     category: "Herbs & Leaves",
     weight: "4 oz",
+    sku: "SS-LG-4OZ",
+    mpn: "SS-LG-4OZ",
+    brand: "Silk Savings®",
     prepSteps: [
       { icon: "📏", label: "Measure", detail: "1–2 tsp per 8 oz cup" },
       { icon: "🌡️", label: "Boil Water", detail: "Full rolling boil (212°F)" },
@@ -429,6 +451,9 @@ export const products: Product[] = [
     images: withPrimary(imagesForFolder("Rue herb"), "rue-herb-tea"),
     category: "Herbs & Leaves",
     weight: "2 oz",
+    sku: "SS-RUE-2OZ",
+    mpn: "SS-RUE-2OZ",
+    brand: "Silk Savings®",
     prepSteps: [
       { icon: "🤏", label: "Small Pinch", detail: "Use just a small pinch" },
       { icon: "🌡️", label: "Heat Water", detail: "Bring to 195°F" },
@@ -482,6 +507,9 @@ export const products: Product[] = [
     badge: "New",
     category: "Herbs & Leaves",
     weight: "4 oz",
+    sku: "SS-JUN-4OZ",
+    mpn: "SS-JUN-4OZ",
+    brand: "Silk Savings®",
     prepSteps: [
       { icon: "📏", label: "Measure", detail: "1 tsp whole berries" },
       { icon: "🫙", label: "Lightly Crush", detail: "Gently crush to release oils" },
@@ -536,6 +564,9 @@ export const products: Product[] = [
     badge: "New",
     category: "Seeds & Kernels",
     weight: "5 oz",
+    sku: "SS-SBT-5OZ",
+    mpn: "SS-SBT-5OZ",
+    brand: "Silk Savings®",
     prepSteps: [
       { icon: "📏", label: "Measure", detail: "1 tsp per serving" },
       { icon: "🌡️", label: "Hot Water", detail: "Water at 195°F" },
@@ -591,6 +622,9 @@ export const products: Product[] = [
     badge: "New",
     category: "Herbs & Leaves",
     weight: "4 oz",
+    sku: "SS-SEN-4OZ",
+    mpn: "SS-SEN-4OZ",
+    brand: "Silk Savings®",
     prepSteps: [
       { icon: "📏", label: "Measure", detail: "1 tsp of dried leaves" },
       { icon: "🌡️", label: "Boil Water", detail: "Full boil (212°F)" },
@@ -655,6 +689,9 @@ export const products: Product[] = [
     badge: "Premium",
     category: "Seeds & Kernels",
     weight: "30g",
+    sku: "SS-SHL-30G",
+    mpn: "SS-SHL-30G",
+    brand: "Silk Savings®",
     prepSteps: shilajitPrepSteps,
     nutritionFacts: {
       servingSize: "pea-sized (300mg)",
@@ -698,6 +735,12 @@ export const products: Product[] = [
 export const getProductById = (id: string) => products.find((p) => p.id === id);
 
 export const categories = [...new Set(products.map((p) => p.category))];
+
+export const BROAD_CATEGORY_KEYWORDS: Record<string, string> = {
+  Flowers: "organic dried flowers, natural herbal teas, dried flowers for crafts, edible flowers bulk",
+  "Seeds & Kernels": "bulk dried herbs, organic superfood seeds, raw seeds for skincare",
+  "Herbs & Leaves": "bulk dried herbs, natural herbal teas, herbs for skincare, organic loose leaf herbs",
+};
 
 export const allReviews = products
   .flatMap((p) => (p.reviews || []).map((r) => ({ ...r, productName: p.name, productId: p.id })))

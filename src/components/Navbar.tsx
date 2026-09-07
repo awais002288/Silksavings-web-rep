@@ -66,6 +66,8 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Silk Savings Lion Logo"
+              width="48"
+              height="48"
               className="w-9 h-9 md:w-12 md:h-12 rounded-full object-cover flex-shrink-0 ring-2 ring-[#c9a227]/40 group-hover:ring-[#c9a227] transition-all"
             />
             <div>
@@ -175,19 +177,23 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="md:hidden flex items-center gap-2">
-            <Link href="/cart" className="relative text-white hover:text-[#c9a227] transition-colors p-1" aria-label="Cart">
+          <div className="md:hidden flex items-center gap-1">
+            <Link
+              href="/cart"
+              className="relative text-white hover:text-[#c9a227] transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg active:bg-white/10"
+              aria-label="Cart"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               {count > 0 && (
-                <span className="absolute top-0 right-0 bg-[#c9a227] text-[#1a3320] text-[9px] font-black w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
+                <span className="absolute top-1 right-1 bg-[#c9a227] text-[#1a3320] text-[9px] font-black w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
                   {count > 9 ? "9+" : count}
                 </span>
               )}
             </Link>
             <button
-              className="text-white p-1.5"
+              className="text-white min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg active:bg-white/10 cursor-pointer"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
             >
@@ -201,44 +207,44 @@ export default function Navbar() {
         </div>
 
         {menuOpen && (
-          <div className="md:hidden border-t border-white/10 py-3 flex flex-col gap-2">
+          <div className="md:hidden border-t border-white/10 py-3 flex flex-col gap-1">
             <Link
               href="/"
-              className={`text-sm font-medium px-2 py-1.5 rounded transition-colors font-sans ${
-                location === "/" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              className={`min-h-[44px] flex items-center text-sm font-medium px-3 rounded-lg transition-colors font-sans ${
+                location === "/" ? "text-[#c9a227] font-semibold" : "text-white/90 hover:text-white"
               }`}
               onClick={() => setMenuOpen(false)}
             >
               Home
             </Link>
 
-            <div className="px-2 py-1">
+            <div className="px-3 py-1">
               <Link
                 href="/products"
-                className="text-sm font-medium text-white/80 font-sans hover:text-[#c9a227] flex items-center justify-between mb-1"
+                className="min-h-[38px] flex items-center justify-between text-sm font-medium text-white/90 font-sans hover:text-[#c9a227] mb-1"
                 onClick={() => setMenuOpen(false)}
               >
                 <span>Products</span>
-                <span className="text-[#c9a227] text-xs">All Products →</span>
+                <span className="text-[#c9a227] text-xs font-semibold">All Products →</span>
               </Link>
-              <div className="flex flex-col gap-1 pl-2 border-l border-white/10">
+              <div className="flex flex-col gap-1 pl-3 border-l-2 border-white/10">
                 <Link
                   href="/products?cat=Flowers"
-                  className="text-xs text-white/70 hover:text-[#c9a227] transition-colors font-sans py-0.5"
+                  className="min-h-[38px] flex items-center text-xs text-white/85 hover:text-[#c9a227] transition-colors font-sans py-1"
                   onClick={() => setMenuOpen(false)}
                 >
                   Dried Flowers
                 </Link>
                 <Link
                   href="/products?cat=Seeds+%26+Kernels"
-                  className="text-xs text-white/70 hover:text-[#c9a227] transition-colors font-sans py-0.5"
+                  className="min-h-[38px] flex items-center text-xs text-white/85 hover:text-[#c9a227] transition-colors font-sans py-1"
                   onClick={() => setMenuOpen(false)}
                 >
                   Seeds &amp; Kernels
                 </Link>
                 <Link
                   href="/products?cat=Herbs+%26+Leaves"
-                  className="text-xs text-white/70 hover:text-[#c9a227] transition-colors font-sans py-0.5"
+                  className="min-h-[38px] flex items-center text-xs text-white/85 hover:text-[#c9a227] transition-colors font-sans py-1"
                   onClick={() => setMenuOpen(false)}
                 >
                   Herbs &amp; Leaves
@@ -248,8 +254,8 @@ export default function Navbar() {
 
             <Link
               href="/about"
-              className={`text-sm font-medium px-2 py-1.5 rounded transition-colors font-sans ${
-                location === "/about" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              className={`min-h-[44px] flex items-center text-sm font-medium px-3 rounded-lg transition-colors font-sans ${
+                location === "/about" ? "text-[#c9a227] font-semibold" : "text-white/90 hover:text-white"
               }`}
               onClick={() => setMenuOpen(false)}
             >
@@ -258,23 +264,23 @@ export default function Navbar() {
 
             <Link
               href="/contact"
-              className={`text-sm font-medium px-2 py-1.5 rounded transition-colors font-sans ${
-                location === "/contact" ? "text-[#c9a227]" : "text-white/80 hover:text-white"
+              className={`min-h-[44px] flex items-center text-sm font-medium px-3 rounded-lg transition-colors font-sans ${
+                location === "/contact" ? "text-[#c9a227] font-semibold" : "text-white/90 hover:text-white"
               }`}
               onClick={() => setMenuOpen(false)}
             >
               Contact
             </Link>
-            <div className="px-2 py-1.5">
-              <div className="text-sm font-medium text-white/80 font-sans mb-1.5">
+            <div className="px-3 py-1.5">
+              <div className="text-sm font-medium text-white/90 font-sans mb-1.5">
                 Certifications
               </div>
-              <div className="flex flex-col gap-1 pl-2 border-l border-white/10">
+              <div className="flex flex-col gap-1 pl-3 border-l-2 border-white/10">
                 {certifications.map((cert) => (
                   <button
                     key={cert.label}
                     type="button"
-                    className="text-left text-sm text-white/70 hover:text-white transition-colors font-sans py-1 cursor-pointer"
+                    className="min-h-[38px] flex items-center text-left text-xs text-white/85 hover:text-white transition-colors font-sans py-1 cursor-pointer"
                     onClick={() => {
                       setMenuOpen(false);
                       setActiveCert(cert);
@@ -287,7 +293,7 @@ export default function Navbar() {
             </div>
             <Link
               href="/products"
-              className="bg-[#c9a227] text-[#1a3320] px-5 py-2 rounded-full text-sm font-bold text-center hover:bg-[#e0b730] transition-colors mt-1 font-sans"
+              className="bg-[#c9a227] text-[#1a3320] min-h-[44px] flex items-center justify-center px-5 rounded-full text-sm font-bold text-center hover:bg-[#e0b730] transition-colors mt-2 font-sans shadow-md"
               onClick={() => setMenuOpen(false)}
             >
               Shop Now
@@ -302,7 +308,7 @@ export default function Navbar() {
             <DialogTitle className="text-lg md:text-xl font-bold text-[#1e3a22] font-sans">
               {activeCert?.label}
             </DialogTitle>
-            <DialogDescription className="text-xs text-[#c9a227] font-semibold uppercase tracking-wider font-sans">
+            <DialogDescription className="text-xs text-[#855f00] font-semibold uppercase tracking-wider font-sans">
               Silk Savings® 100% Pure & Organic Quality Verification
             </DialogDescription>
           </DialogHeader>

@@ -13,16 +13,18 @@ export default function Footer() {
               <img
                 src={logo}
                 alt="Silk Savings"
+                width="40"
+                height="40"
                 className="w-10 h-10 rounded-full object-cover ring-2 ring-[#c9a227]/50"
               />
               <div>
                 <div className="font-bold text-lg leading-none font-display">
                   Silk Savings<span className="text-[#c9a227] text-xs align-super ml-0.5">®</span>
                 </div>
-                <div className="text-[#c9a227]/60 text-xs tracking-widest uppercase font-sans">100% Pure & Organic</div>
+                <div className="text-[#c9a227] text-xs tracking-widest uppercase font-sans font-semibold mt-1">100% Pure &amp; Organic</div>
               </div>
             </div>
-            <p className="text-white/40 text-xs font-sans leading-relaxed max-w-48">
+            <p className="text-white/75 text-xs font-sans leading-relaxed max-w-48">
               Premium organic herbs, flowers &amp; seeds — ethically sourced.
             </p>
           </div>
@@ -38,7 +40,7 @@ export default function Footer() {
                   { href: "/products?cat=Seeds+%26+Kernels", label: "Seeds & Kernels" },
                   { href: "/products?cat=Herbs+%26+Leaves", label: "Herbs & Leaves" },
                 ].map((l) => (
-                  <li key={l.href}><Link href={l.href} className="text-white/50 hover:text-white text-sm transition-colors font-sans">{l.label}</Link></li>
+                  <li key={l.href}><Link href={l.href} className="text-white/80 hover:text-white text-sm transition-colors font-sans">{l.label}</Link></li>
                 ))}
               </ul>
             </div>
@@ -51,13 +53,13 @@ export default function Footer() {
                   { href: "/returns", label: "Returns" },
                   { href: "/privacy", label: "Privacy Policy" },
                 ].map((l) => (
-                  <li key={l.href}><Link href={l.href} className="text-white/50 hover:text-white text-sm transition-colors font-sans">{l.label}</Link></li>
+                  <li key={l.href}><Link href={l.href} className="text-white/80 hover:text-white text-sm transition-colors font-sans">{l.label}</Link></li>
                 ))}
               </ul>
             </div>
             <div>
               <p className="text-[#c9a227] text-xs font-bold uppercase tracking-widest mb-3 font-sans">Contact</p>
-              <ul className="space-y-2 text-sm font-sans text-white/50">
+              <ul className="space-y-2 text-sm font-sans text-white/80">
                 <li>30 N Gould St, Sheridan WY 82801</li>
                 <li><a href="tel:3072438254" className="hover:text-white transition-colors">307-243-8254</a></li>
                 <li><a href="mailto:support@leadscollab.uk" className="hover:text-white transition-colors">support@leadscollab.uk</a></li>
@@ -67,7 +69,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/8 pt-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white/30 font-sans">
+        <div className="border-t border-white/10 pt-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white/70 font-sans">
           <p>&copy; {new Date().getFullYear()} leadscollaborate LLC. Silk Savings® is a registered trademark.</p>
         </div>
       </div>
