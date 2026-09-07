@@ -9,6 +9,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import halalCertification from "@/assets/certifications/halal-certification.webp";
 import gmpCertification from "@/assets/certifications/gmp-certification.webp";
 import certificateOfAnalysis from "@/assets/certifications/certificate-of-analysis.webp";
@@ -27,6 +34,7 @@ export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
   const { count } = useCart();
+  const [activeCert, setActiveCert] = useState<(typeof certifications)[number] | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -91,7 +99,7 @@ export default function Navbar() {
               </Link>
             ))}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium tracking-wide transition-colors font-sans text-white/80 hover:text-white outline-none">
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium tracking-wide transition-colors font-sans text-white/80 hover:text-white outline-none cursor-pointer">
                 Certifications
                 <ChevronDown className="w-3.5 h-3.5" />
               </DropdownMenuTrigger>
@@ -100,15 +108,12 @@ export default function Navbar() {
                 className="bg-[#1a3320] border-white/10 text-white/90"
               >
                 {certifications.map((cert) => (
-                  <DropdownMenuItem key={cert.label} asChild>
-                    <a
-                      href={cert.image}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cursor-pointer font-sans focus:bg-white/10 focus:text-white"
-                    >
-                      {cert.label}
-                    </a>
+                  <DropdownMenuItem
+                    key={cert.label}
+                    onSelect={() => setActiveCert(cert)}
+                    className="cursor-pointer font-sans focus:bg-white/10 focus:text-white"
+                  >
+                    {cert.label}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -178,16 +183,17 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col gap-1 pl-2 border-l border-white/10">
                 {certifications.map((cert) => (
-                  <a
+                  <button
                     key={cert.label}
-                    href={cert.image}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-white/70 hover:text-white transition-colors font-sans py-1"
-                    onClick={() => setMenuOpen(false)}
+                    type="button"
+                    className="text-left text-sm text-white/70 hover:text-white transition-colors font-sans py-1 cursor-pointer"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setActiveCert(cert);
+                    }}
                   >
                     {cert.label}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -201,6 +207,43 @@ export default function Navbar() {
           </div>
         )}
       </nav>
+
+      <Dialog open={!!activeCert} onOpenChange={(open) => !open && setActiveCert(null)}>
+        <DialogContent className="max-w-[95vw] sm:max-w-2xl md:max-w-3xl max-h-[92vh] flex flex-col p-4 sm:p-6 bg-white rounded-2xl border border-gray-100 shadow-2xl overflow-hidden text-gray-900">
+          <DialogHeader className="mb-2 text-left pr-8">
+            <DialogTitle className="text-lg md:text-xl font-bold text-[#1e3a22] font-sans">
+              {activeCert?.label}
+            </DialogTitle>
+            <DialogDescription className="text-xs text-[#c9a227] font-semibold uppercase tracking-wider font-sans">
+              Silk Savings® 100% Pure & Organic Quality Verification
+            </DialogDescription>
+          </DialogHeader>
+
+          {activeCert && (
+            <div className="relative flex-1 overflow-auto rounded-xl bg-gray-50/80 p-2 sm:p-4 flex items-center justify-center border border-gray-100">
+              <img
+                src={activeCert.image}
+                alt={activeCert.label}
+                className="max-h-[66vh] w-auto object-contain rounded-lg shadow-sm"
+              />
+            </div>
+          )}
+
+          <div className="mt-2 flex items-center justify-between pt-2 border-t border-gray-100 text-xs text-gray-500 font-sans">
+            <span>Silk Savings® Verified Document</span>
+            {activeCert && (
+              <a
+                href={activeCert.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2c5530] font-semibold hover:text-[#1e3a22] hover:underline flex items-center gap-1"
+              >
+                Open Full Resolution ↗
+              </a>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 }
