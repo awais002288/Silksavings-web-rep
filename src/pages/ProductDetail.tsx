@@ -3,6 +3,69 @@ import { Link, useParams } from "wouter";
 import { getProductById, products } from "@/data/products";
 import { useSEO } from "@/hooks/useSEO";
 import { useCart } from "@/lib/cartContext";
+import halalCertification from "@/assets/certifications/halal-certification.webp";
+import gmpCertification from "@/assets/certifications/gmp-certification.webp";
+import certificateOfAnalysis from "@/assets/certifications/certificate-of-analysis.webp";
+import materialTesting from "@/assets/certifications/material-testing.webp";
+
+const CERTIFICATIONS = [
+  { key: "halal", label: "Halal Certification", image: halalCertification },
+  { key: "gmp", label: "GMP Certification", image: gmpCertification },
+  { key: "coa", label: "Certificate of Analysis", image: certificateOfAnalysis },
+  { key: "material", label: "Material Testing", image: materialTesting },
+] as const;
+
+function CertificationsSection() {
+  const [activeCert, setActiveCert] = useState<string | null>(null);
+  const active = CERTIFICATIONS.find((c) => c.key === activeCert);
+
+  return (
+    <div className="mt-12 md:mt-16">
+      <div className="text-center mb-8 md:mb-10">
+        <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Verified Quality</div>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22]">Certifications</h2>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-2xl mx-auto">
+        {CERTIFICATIONS.map((cert) => (
+          <button
+            key={cert.key}
+            type="button"
+            onClick={() => setActiveCert((prev) => (prev === cert.key ? null : cert.key))}
+            aria-pressed={activeCert === cert.key}
+            className={`px-3 py-3 rounded-xl border text-xs md:text-sm font-semibold font-sans text-center transition-colors ${
+              activeCert === cert.key
+                ? "bg-[#1e3a22] border-[#1e3a22] text-white"
+                : "bg-white border-gray-200 text-[#1e3a22] hover:border-[#c9a227] hover:text-[#c9a227]"
+            }`}
+          >
+            {cert.label}
+          </button>
+        ))}
+      </div>
+
+      {active && (
+        <div className="mt-6 md:mt-8 max-w-md mx-auto">
+          <div className="relative bg-white rounded-xl md:rounded-2xl border border-gray-100 shadow-md p-3 md:p-4">
+            <button
+              type="button"
+              onClick={() => setActiveCert(null)}
+              aria-label="Close"
+              className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-[#1e3a22] text-white flex items-center justify-center text-sm shadow-md hover:bg-[#c9a227] hover:text-[#1e3a22] transition-colors"
+            >
+              ✕
+            </button>
+            <img
+              src={active.image}
+              alt={active.label}
+              className="w-full h-auto rounded-lg"
+            />
+            <p className="text-center text-xs md:text-sm font-semibold text-[#1e3a22] mt-3 font-sans">{active.label}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -363,6 +426,9 @@ export default function ProductDetail() {
             </div>
           </div>
         )}
+
+        {/* ═══ CERTIFICATIONS ═══ */}
+        <CertificationsSection />
 
         {/* ═══ GALLERY ═══ */}
         {product.images.length > 1 && (
