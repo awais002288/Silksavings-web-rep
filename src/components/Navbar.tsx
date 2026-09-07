@@ -1,7 +1,25 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
+import { ChevronDown } from "lucide-react";
 import { useCart } from "@/lib/cartContext";
 import logo from "@/assets/logo.png";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import halalCertification from "@/assets/certifications/halal-certification.webp";
+import gmpCertification from "@/assets/certifications/gmp-certification.webp";
+import certificateOfAnalysis from "@/assets/certifications/certificate-of-analysis.webp";
+import materialTesting from "@/assets/certifications/material-testing.webp";
+
+const certifications = [
+  { label: "Halal Certification", image: halalCertification },
+  { label: "GMP Certification", image: gmpCertification },
+  { label: "Certificate of Analysis (COA)", image: certificateOfAnalysis },
+  { label: "Material Testing", image: materialTesting },
+];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -72,6 +90,29 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium tracking-wide transition-colors font-sans text-white/80 hover:text-white outline-none">
+                Certifications
+                <ChevronDown className="w-3.5 h-3.5" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="start"
+                className="bg-[#1a3320] border-white/10 text-white/90"
+              >
+                {certifications.map((cert) => (
+                  <DropdownMenuItem key={cert.label} asChild>
+                    <a
+                      href={cert.image}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cursor-pointer font-sans focus:bg-white/10 focus:text-white"
+                    >
+                      {cert.label}
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Link
               href="/products"
               className="bg-[#c9a227] text-[#1a3320] px-5 py-2.5 rounded-full text-sm font-bold hover:bg-[#e0b730] transition-colors font-sans tracking-wide shadow-md"
@@ -131,6 +172,25 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <div className="px-2 py-1.5">
+              <div className="text-sm font-medium text-white/80 font-sans mb-1.5">
+                Certifications
+              </div>
+              <div className="flex flex-col gap-1 pl-2 border-l border-white/10">
+                {certifications.map((cert) => (
+                  <a
+                    key={cert.label}
+                    href={cert.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white/70 hover:text-white transition-colors font-sans py-1"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {cert.label}
+                  </a>
+                ))}
+              </div>
+            </div>
             <Link
               href="/products"
               className="bg-[#c9a227] text-[#1a3320] px-5 py-2 rounded-full text-sm font-bold text-center hover:bg-[#e0b730] transition-colors mt-1 font-sans"
