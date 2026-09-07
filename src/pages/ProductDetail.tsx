@@ -7,6 +7,13 @@ import halalCertification from "@/assets/certifications/halal-certification.webp
 import gmpCertification from "@/assets/certifications/gmp-certification.webp";
 import certificateOfAnalysis from "@/assets/certifications/certificate-of-analysis.webp";
 import materialTesting from "@/assets/certifications/material-testing.webp";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const CERTIFICATIONS = [
   { key: "halal", label: "Halal Certification", image: halalCertification },
@@ -22,7 +29,9 @@ function CertificationsSection() {
   return (
     <div className="mt-12 md:mt-16">
       <div className="text-center mb-8 md:mb-10">
-        <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">Verified Quality</div>
+        <div className="text-[#c9a227] text-xs tracking-widest uppercase font-semibold mb-2 font-sans">
+          Verified Quality
+        </div>
         <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a22]">Certifications</h2>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-2xl mx-auto">
@@ -30,39 +39,50 @@ function CertificationsSection() {
           <button
             key={cert.key}
             type="button"
-            onClick={() => setActiveCert((prev) => (prev === cert.key ? null : cert.key))}
-            aria-pressed={activeCert === cert.key}
-            className={`px-3 py-3 rounded-xl border text-xs md:text-sm font-semibold font-sans text-center transition-colors ${
-              activeCert === cert.key
-                ? "bg-[#1e3a22] border-[#1e3a22] text-white"
-                : "bg-white border-gray-200 text-[#1e3a22] hover:border-[#c9a227] hover:text-[#c9a227]"
-            }`}
+            onClick={() => setActiveCert(cert.key)}
+            className="px-3 py-3 rounded-xl border border-gray-200 bg-white text-[#1e3a22] hover:border-[#c9a227] hover:text-[#c9a227] hover:shadow-md transition-all text-xs md:text-sm font-semibold font-sans text-center cursor-pointer active:scale-95"
           >
             {cert.label}
           </button>
         ))}
       </div>
 
-      {active && (
-        <div className="mt-6 md:mt-8 max-w-md mx-auto">
-          <div className="relative bg-white rounded-xl md:rounded-2xl border border-gray-100 shadow-md p-3 md:p-4">
-            <button
-              type="button"
-              onClick={() => setActiveCert(null)}
-              aria-label="Close"
-              className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-[#1e3a22] text-white flex items-center justify-center text-sm shadow-md hover:bg-[#c9a227] hover:text-[#1e3a22] transition-colors"
-            >
-              ✕
-            </button>
-            <img
-              src={active.image}
-              alt={active.label}
-              className="w-full h-auto rounded-lg"
-            />
-            <p className="text-center text-xs md:text-sm font-semibold text-[#1e3a22] mt-3 font-sans">{active.label}</p>
+      <Dialog open={!!active} onOpenChange={(open) => !open && setActiveCert(null)}>
+        <DialogContent className="max-w-[95vw] sm:max-w-2xl md:max-w-3xl max-h-[92vh] flex flex-col p-4 sm:p-6 bg-white rounded-2xl border border-gray-100 shadow-2xl overflow-hidden">
+          <DialogHeader className="mb-2 text-left pr-8">
+            <DialogTitle className="text-lg md:text-xl font-bold text-[#1e3a22] font-sans">
+              {active?.label}
+            </DialogTitle>
+            <DialogDescription className="text-xs text-[#c9a227] font-semibold uppercase tracking-wider font-sans">
+              Silk Savings® 100% Pure & Organic Quality Verification
+            </DialogDescription>
+          </DialogHeader>
+
+          {active && (
+            <div className="relative flex-1 overflow-auto rounded-xl bg-gray-50/80 p-2 sm:p-4 flex items-center justify-center border border-gray-100">
+              <img
+                src={active.image}
+                alt={active.label}
+                className="max-h-[66vh] w-auto object-contain rounded-lg shadow-sm"
+              />
+            </div>
+          )}
+
+          <div className="mt-2 flex items-center justify-between pt-2 border-t border-gray-100 text-xs text-gray-500 font-sans">
+            <span>Silk Savings® Verified Document</span>
+            {active && (
+              <a
+                href={active.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2c5530] font-semibold hover:text-[#1e3a22] hover:underline flex items-center gap-1"
+              >
+                Open Full Resolution ↗
+              </a>
+            )}
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
