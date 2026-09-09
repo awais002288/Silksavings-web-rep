@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { getProductById, products, BROAD_CATEGORY_KEYWORDS } from "@/data/products";
 import { useSEO } from "@/hooks/useSEO";
@@ -208,6 +208,13 @@ export default function ProductDetail() {
   const { addToCart } = useCart();
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
+
+  // Pre-warm the backend as soon as the product page loads.
+  // Render's free tier shuts down after inactivity; this ping wakes it up
+  // early so the server is ready long before the user clicks Buy Now.
+  useEffect(() => {
+    fetch("/api/healthz").catch(() => {/* ignore — fire-and-forget */});
+  }, []);
 
   if (!product) {
     return <ProductNotFound />;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useCart } from "@/lib/cartContext";
 import { products } from "@/data/products";
@@ -18,6 +18,13 @@ export default function Cart() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const [addedIds, setAddedIds] = useState<string[]>([]);
+
+  // Pre-warm the backend as soon as the cart page loads.
+  // Render's free tier shuts down after inactivity; this ping wakes it up
+  // early so the server is ready long before the user clicks Checkout.
+  useEffect(() => {
+    fetch("/api/healthz").catch(() => {/* ignore — fire-and-forget */});
+  }, []);
 
   const suggestions = products
     .filter((p) => !items.find((i) => i.product.id === p.id))
