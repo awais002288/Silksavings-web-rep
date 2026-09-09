@@ -216,6 +216,22 @@ export default function ProductDetail() {
     fetch("/api/healthz").catch(() => {/* ignore — fire-and-forget */});
   }, []);
 
+  // Reset checkout loading state when the user navigates back from Stripe.
+  // Modern browsers cache pages in bfcache — when the user hits Back, the
+  // page is restored with stale React state (checkoutLoading = true), leaving
+  // the button stuck on "Redirecting…". The pageshow event fires on bfcache
+  // restore and lets us clear the state.
+  useEffect(() => {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setCheckoutLoading(false);
+        setCheckoutError("");
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
+
   if (!product) {
     return <ProductNotFound />;
   }
@@ -446,7 +462,15 @@ export default function ProductDetail() {
                 disabled={checkoutLoading}
                 className="flex-1 min-h-[48px] bg-[#2c5530] text-white text-center py-3.5 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-[#1e3a22] transition-all shadow-md font-sans disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
               >
-                {checkoutLoading ? "Redirecting…" : "🛒 Buy Now — Secure Checkout"}
+                {checkoutLoading ? (
+                  <>
+                    <svg className="animate-spin w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+                    </svg>
+                    Connecting to Stripe…
+                  </>
+                ) : "🛒 Buy Now — Secure Checkout"}
               </button>
               <button
                 onClick={handleCart}

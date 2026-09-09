@@ -26,6 +26,18 @@ export default function Cart() {
     fetch("/api/healthz").catch(() => {/* ignore — fire-and-forget */});
   }, []);
 
+  // Reset checkout loading when the user navigates back from Stripe (bfcache restore).
+  useEffect(() => {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setCheckoutLoading(false);
+        setCheckoutError("");
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
+
   const suggestions = products
     .filter((p) => !items.find((i) => i.product.id === p.id))
     .sort(() => Math.random() - 0.5)
