@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/lib/cartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import Home from "@/pages/Home";
 
 // Route-level code splitting
@@ -44,19 +45,21 @@ function Router() {
       <ScrollToTop />
       <Navbar />
       <main className="flex-1">
-        <Suspense fallback={<PageLoader />}>
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/products" component={Products} />
-            <Route path="/products/:id" component={ProductDetail} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/about" component={About} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/privacy" component={Privacy} />
-            <Route path="/returns" component={Returns} />
-            <Route component={NotFound} />
-          </Switch>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/products" component={Products} />
+              <Route path="/products/:id" component={ProductDetail} />
+              <Route path="/cart" component={Cart} />
+              <Route path="/about" component={About} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/returns" component={Returns} />
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>
