@@ -17,6 +17,7 @@ const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const Returns = lazy(() => import("@/pages/Returns"));
+const ThankYou = lazy(() => import("@/pages/ThankYou"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const ChatWidget = lazy(() => import("@/components/ChatWidget"));
 
@@ -35,6 +36,11 @@ function ScrollToTop() {
   const search = useSearch();
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "page_view", {
+        page_path: location + (search ? `?${search}` : ""),
+      });
+    }
   }, [location, search]);
   return null;
 }
@@ -56,6 +62,9 @@ function Router() {
               <Route path="/contact" component={Contact} />
               <Route path="/privacy" component={Privacy} />
               <Route path="/returns" component={Returns} />
+              <Route path="/thank-you" component={ThankYou} />
+              <Route path="/order-success" component={ThankYou} />
+              <Route path="/success" component={ThankYou} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
