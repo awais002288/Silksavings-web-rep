@@ -203,7 +203,7 @@ export default function Cart() {
                   <span>Shipping</span>
                   <span className="text-[#2c5530] font-semibold flex items-center gap-1.5">
                     <span>FREE</span>
-                    <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded-full">Worldwide</span>
+                    <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded-full">All Orders</span>
                   </span>
                 </div>
                 <div className="border-t border-gray-100 pt-2.5 flex justify-between font-black text-[#1e3a22] text-base">

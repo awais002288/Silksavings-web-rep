@@ -459,7 +459,7 @@ export default function ProductDetail() {
             <div className="flex items-center gap-2.5 bg-[#f0f7f0] border border-[#2c5530]/20 rounded-2xl px-4 py-3 mb-5 text-[#1e3a22] font-sans text-xs md:text-sm font-semibold shadow-xs">
               <span className="text-xl">🚚</span>
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-                <span className="text-[#2c5530] font-bold">FREE Worldwide Shipping</span>
+                <span className="text-[#2c5530] font-bold">FREE Shipping on All Orders</span>
                 <span className="text-gray-500 font-normal text-xs sm:before:content-['•'] sm:before:mr-2">Applied automatically at checkout</span>
               </div>
             </div>
@@ -660,8 +660,8 @@ export default function ProductDetail() {
             <div className="w-12 h-12 rounded-full bg-[#f0f7f0] flex items-center justify-center text-[#2c5530] text-2xl mb-3">
               📦
             </div>
-            <h4 className="font-bold text-[#1e3a22] text-base mb-1 font-sans">Free Worldwide Shipping</h4>
-            <p className="text-gray-600 text-xs leading-relaxed font-sans">Orders over $50 qualify for fast, tracked international dispatch directly to your doorstep.</p>
+            <h4 className="font-bold text-[#1e3a22] text-base mb-1 font-sans">Free Shipping on All Orders</h4>
+            <p className="text-gray-600 text-xs leading-relaxed font-sans">All orders qualify for fast, tracked dispatch directly to your doorstep with zero shipping fees.</p>
           </div>
 
           <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm text-center flex flex-col items-center">
