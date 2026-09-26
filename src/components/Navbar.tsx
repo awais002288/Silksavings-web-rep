@@ -60,6 +60,11 @@ export default function Navbar() {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
+      {/* Free Shipping Announcement Bar */}
+      <div className="bg-[#24462b] text-[#f5d77f] py-1.5 px-3 text-center text-xs font-semibold tracking-wider font-sans border-b border-white/10 flex items-center justify-center gap-1.5 sm:gap-2">
+        <span>🚚</span>
+        <span>FREE Worldwide Shipping on All Orders</span>
+      </div>
       <nav className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-1.5 md:py-2">
           <Link href="/" className="flex items-center gap-2 md:gap-3 group">

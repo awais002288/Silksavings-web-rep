@@ -46,7 +46,7 @@ const CATEGORY_SEO_DATA: Record<
       },
       {
         question: "What is your shipping policy and satisfaction guarantee?",
-        answer: "Orders over $50 qualify for Free Worldwide Shipping with full online tracking. We back every order with our 30-Day Money-Back Guarantee — if you are not delighted with your botanicals, contact us for an easy refund or exchange.",
+        answer: "All orders qualify for Free Worldwide Shipping with full online tracking. We back every order with our 30-Day Money-Back Guarantee — if you are not delighted with your botanicals, contact us for an easy refund or exchange.",
       },
     ],
   },

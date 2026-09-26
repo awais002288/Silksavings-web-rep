@@ -252,7 +252,7 @@ export default function ProductDetail() {
       },
       {
         question: `What are the delivery times and 30-day guarantee?`,
-        answer: `Orders are packed in protective eco-friendly packaging and dispatched promptly with live tracking. Orders over $50 receive Free Worldwide Shipping. Every purchase is backed by our 30-Day Money-Back Guarantee.`,
+        answer: `Orders are packed in protective eco-friendly packaging and dispatched promptly with live tracking. All orders receive Free Worldwide Shipping with zero delivery fees. Every purchase is backed by our 30-Day Money-Back Guarantee.`,
       },
     ],
     [product]
@@ -454,6 +454,15 @@ export default function ProductDetail() {
             </div>
 
             <p className="text-gray-600 leading-relaxed mb-5 text-sm md:text-base font-sans">{product.longDescription}</p>
+
+            {/* Free Shipping Strip */}
+            <div className="flex items-center gap-2.5 bg-[#f0f7f0] border border-[#2c5530]/20 rounded-2xl px-4 py-3 mb-5 text-[#1e3a22] font-sans text-xs md:text-sm font-semibold shadow-xs">
+              <span className="text-xl">🚚</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+                <span className="text-[#2c5530] font-bold">FREE Worldwide Shipping</span>
+                <span className="text-gray-500 font-normal text-xs sm:before:content-['•'] sm:before:mr-2">Applied automatically at checkout</span>
+              </div>
+            </div>
 
             {/* ── BUY NOW / ADD TO CART ── */}
             <div className="flex flex-col sm:flex-row gap-3 mb-5">

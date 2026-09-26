@@ -80,8 +80,8 @@ export default function Cart() {
     setTimeout(() => setAddedIds((prev) => prev.filter((id) => id !== product.id)), 1800);
   };
 
-  const shipping = subtotal >= 35 ? 0 : 4.99;
-  const total = subtotal + shipping;
+  const shipping = 0;
+  const total = subtotal;
 
   if (count === 0) {
     return (
@@ -201,16 +201,11 @@ export default function Cart() {
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Shipping</span>
-                  {shipping === 0
-                    ? <span className="text-[#2c5530] font-semibold">FREE</span>
-                    : <span className="font-medium text-gray-800">${shipping.toFixed(2)}</span>
-                  }
+                  <span className="text-[#2c5530] font-semibold flex items-center gap-1.5">
+                    <span>FREE</span>
+                    <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded-full">Worldwide</span>
+                  </span>
                 </div>
-                {shipping > 0 && (
-                  <p className="text-[10px] text-[#c9a227] font-sans">
-                    Add ${(35 - subtotal).toFixed(2)} more for free shipping!
-                  </p>
-                )}
                 <div className="border-t border-gray-100 pt-2.5 flex justify-between font-black text-[#1e3a22] text-base">
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
