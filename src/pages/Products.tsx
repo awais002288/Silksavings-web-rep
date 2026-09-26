@@ -169,7 +169,7 @@ export default function Products() {
   return (
     <div className="min-h-screen">
       {/* Breadcrumb Navigation */}
-      <div className="bg-[#1b3420] border-b border-white/10 pt-20 pb-3 px-4">
+      <div className="bg-[#1b3420] border-b border-white/10 pt-24 sm:pt-28 pb-3 px-4">
         <div className="max-w-7xl mx-auto">
           <nav className="text-xs md:text-sm text-white/85 flex items-center gap-1.5 md:gap-2 font-sans flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>

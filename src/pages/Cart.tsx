@@ -85,7 +85,7 @@ export default function Cart() {
 
   if (count === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f8faf8] to-white flex flex-col items-center justify-center px-4 pt-24 pb-16">
+      <div className="min-h-screen bg-gradient-to-b from-[#f8faf8] to-white flex flex-col items-center justify-center px-4 pt-28 pb-16">
         <div className="text-center max-w-md">
           <div className="text-8xl mb-6">🛒</div>
           <h1 className="text-3xl font-bold text-[#1e3a22] mb-3">Your cart is empty</h1>
@@ -111,7 +111,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f8faf8] to-white pt-20 pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-[#f8faf8] to-white pt-28 pb-20">
       <div className="max-w-6xl mx-auto px-4">
 
         {/* Header */}

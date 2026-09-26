@@ -12,7 +12,7 @@ export default function About() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <div className="hero-gradient pt-28 pb-16 px-4 text-center">
+      <div className="hero-gradient pt-32 pb-16 px-4 text-center">
         <div className="text-[#c9a227] text-sm tracking-widest uppercase font-semibold mb-2">Who We Are</div>
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About Silk Savings</h1>
         <p className="text-white/70 text-lg max-w-2xl mx-auto">

@@ -16,7 +16,7 @@ export default function ThankYou() {
   }, []);
 
   return (
-    <div className="min-h-[80vh] bg-gradient-to-b from-[#f8faf8] to-white flex flex-col items-center justify-center px-4 pt-24 pb-16">
+    <div className="min-h-[80vh] bg-gradient-to-b from-[#f8faf8] to-white flex flex-col items-center justify-center px-4 pt-32 pb-16">
       <div className="max-w-lg w-full bg-white border border-gray-100 shadow-xl rounded-3xl p-8 md:p-10 text-center">
         <div className="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner">
           ✓

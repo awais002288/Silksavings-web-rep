@@ -310,7 +310,7 @@ export default function ProductDetail() {
   return (
     <div className="min-h-screen bg-[#fafaf8]">
       {/* Breadcrumb */}
-      <div className="bg-white border-b border-gray-100 pt-16 md:pt-20 pb-3 px-4">
+      <div className="bg-white border-b border-gray-100 pt-24 sm:pt-28 pb-3 px-4">
         <div className="max-w-7xl mx-auto">
           <nav className="text-xs md:text-sm text-gray-600 flex items-center gap-1.5 md:gap-2 font-sans flex-wrap">
             <Link href="/" className="hover:text-[#2c5530] transition-colors">Home</Link>
