@@ -61,6 +61,21 @@ Disallow: /cart
 Disallow: /checkout
 Disallow: /api/
 
+# OpenAI crawlers - explicitly allowed (ChatGPT search + ChatGPT ads landing page validation)
+# Ref: https://help.openai.com/en/articles/20001243-advertiser-guidance-for-allowing-openai-web-crawlers
+# Query-param disallows are intentionally omitted so ad landing URLs with tracking params stay crawlable.
+User-agent: OAI-AdsBot
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /api/
+
 # Sitemaps
 Sitemap: https://www.silksavings.shop/sitemap.xml
 Sitemap: https://silksavings.shop/sitemap.xml
