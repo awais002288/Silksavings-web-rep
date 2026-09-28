@@ -74,16 +74,16 @@ const CATEGORY_SEO_DATA: Record<
     ],
   },
   "Seeds & Kernels": {
-    title: "Organic Apricot Seeds, Sea Buckthorn & Shilajit | Silk Savings®",
+    title: "Organic Apricot Kernels, Sea Buckthorn & Shilajit | Silk Savings®",
     description: "Shop raw organic bitter apricot kernels, wild sea buckthorn berries, and pure sun-dried Himalayan Shilajit resin. Nutrient-dense organic superfoods.",
-    keywords: "organic apricot kernels, raw bitter apricot seeds, wild sea buckthorn berries, pure shilajit resin, organic superfood seeds, bulk dried herbs",
+    keywords: "organic apricot kernels, raw bitter apricot kernels, bulk apricot kernels, wild sea buckthorn berries, pure shilajit resin, organic superfood seeds, bulk dried herbs",
     heading: "Organic Seeds, Kernels & Superfoods",
-    subheading: "Unprocessed bitter apricot seeds, nutrient-packed sea buckthorn, and authentic mineral-rich Himalayan Shilajit.",
+    subheading: "Unprocessed bitter apricot kernels, nutrient-packed sea buckthorn, and authentic mineral-rich Himalayan Shilajit.",
     guideTitle: "Superfood Guide: Seeds, Berries & Mountain Resin",
     guideText: "From raw, sun-dried bitter apricot kernels to wild-harvested sea buckthorn berries and authentic high-altitude Shilajit resin, our seeds and superfoods deliver dense nutritional profiles rich in healthy fatty acids, vitamins A, C, and E, and over 84 trace minerals.",
     faqs: [
       {
-        question: "What is the recommended daily serving of bitter apricot seeds?",
+        question: "What is the recommended daily serving of bitter apricot kernels?",
         answer: "We suggest starting with 3 kernels per day. They can be added to morning smoothies, mixed with yogurt or oatmeal, or sprinkled onto fresh salads.",
       },
       {
@@ -92,7 +92,7 @@ const CATEGORY_SEO_DATA: Record<
       },
       {
         question: "Are these seeds raw and unprocessed?",
-        answer: "Yes, our bitter apricot seeds and sea buckthorn berries are raw, unroasted, non-GMO, and certified organic with zero added oils or preservatives.",
+        answer: "Yes, our bitter apricot kernels and sea buckthorn berries are raw, unroasted, non-GMO, and certified organic with zero added oils or preservatives.",
       },
     ],
   },

@@ -22,7 +22,7 @@ const shopCategories = [
   },
   {
     name: "Seeds & Kernels",
-    desc: "Apricot Seeds, Sea Buckthorn & more",
+    desc: "Apricot Kernels, Sea Buckthorn & more",
     href: "/products?cat=Seeds+%26+Kernels",
     image: getProductById("bitter-apricot-seeds-1lb")!.images[0],
     accent: "#2c5530",
@@ -327,7 +327,7 @@ export default function Home() {
               </div>
               <div className="space-y-3 md:space-y-4 pt-6 md:pt-8">
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-48 md:h-64">
-                  <img src={getProductById("bitter-apricot-seeds-8oz")!.images[0]} alt="Apricot seeds" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("bitter-apricot-seeds-8oz")!.images[0]} alt="Apricot kernels" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-36 md:h-48">
                   <img src={getProductById("dried-lemon-grass")!.images[0]} alt="Lemon grass" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />

@@ -24,7 +24,7 @@ const KB: { keywords: string[]; reply: string; link?: string }[] = [
   {
     keywords: ["apricot", "kernels", "b17", "amygdalin"],
     reply:
-      "🍑 *Organic Bitter Apricot Seeds*\n• 8 oz — $17.99\n• 1 lb value pack — $29.99\nRaw, unprocessed, USDA Organic. Popular in traditional wellness routines. Non-GMO certified.\n👉 Which size works for you?",
+      "🍑 *Organic Bitter Apricot Kernels*\n• 8 oz — $17.99\n• 1 lb value pack — $29.99\nRaw, unprocessed, USDA Organic. Popular in traditional wellness routines. Non-GMO certified.\n👉 Which size works for you?",
     link: "/products/bitter-apricot-seeds-8oz",
   },
   {
@@ -93,7 +93,7 @@ const KB: { keywords: string[]; reply: string; link?: string }[] = [
   {
     keywords: ["price", "cost", "cheap", "expensive", "how much"],
     reply:
-      "💰 *Our Prices*\nAll products $14.99–$49.99:\n• Calendula Flowers — $19.99\n• Apricot Seeds 8oz — $17.99\n• Apricot Seeds 1lb — $29.99\n• Rose Petals — $14.99\n• Shilajit Resin — $49.99\n• + 6 more products!\n\nAll USDA Organic & lab-tested.",
+      "💰 *Our Prices*\nAll products $14.99–$49.99:\n• Calendula Flowers — $19.99\n• Apricot Kernels 8oz — $17.99\n• Apricot Kernels 1lb — $29.99\n• Rose Petals — $14.99\n• Shilajit Resin — $49.99\n• + 6 more products!\n\nAll USDA Organic & lab-tested.",
     link: "/products",
   },
   {
@@ -114,7 +114,7 @@ const KB: { keywords: string[]; reply: string; link?: string }[] = [
   {
     keywords: ["popular", "best seller", "bestseller", "recommend", "best", "top"],
     reply:
-      "⭐ *Most Popular Products*\n1. 🌼 Calendula Flowers — $19.99\n2. ⚫ Shilajit Resin — $49.99\n3. 🍑 Apricot Seeds — $17.99\n4. 🧡 Sea Buckthorn — $22.99\n\nAll USDA Organic & best sellers with 5-star reviews!",
+      "⭐ *Most Popular Products*\n1. 🌼 Calendula Flowers — $19.99\n2. ⚫ Shilajit Resin — $49.99\n3. 🍑 Apricot Kernels — $17.99\n4. 🧡 Sea Buckthorn — $22.99\n\nAll USDA Organic & best sellers with 5-star reviews!",
     link: "/products",
   },
   {
@@ -263,7 +263,7 @@ export default function ChatWidget() {
 
     if (lower.includes("view products") || lower.includes("browse")) {
       await addBotMessage(
-        "🌿 *Our Product Range*\nWe carry 11 premium organic products:\n\n🌼 Calendula Flowers — $19.99\n🍑 Apricot Seeds — from $17.99\n🌹 Rose Petals — $14.99\n🌿 Yarrow Herb — $19.99\n🍋 Lemon Grass — $16.99\n🌱 Rue Herb — $17.99\n🫐 Juniper Berries — $18.99\n🧡 Sea Buckthorn — $22.99\n🍃 Senna Leaves — $16.99\n⚫ Shilajit Resin — $49.99\n\nAll USDA Organic & Non-GMO ✓",
+        "🌿 *Our Product Range*\nWe carry 11 premium organic products:\n\n🌼 Calendula Flowers — $19.99\n🍑 Apricot Kernels — from $17.99\n🌹 Rose Petals — $14.99\n🌿 Yarrow Herb — $19.99\n🍋 Lemon Grass — $16.99\n🌱 Rue Herb — $17.99\n🫐 Juniper Berries — $18.99\n🧡 Sea Buckthorn — $22.99\n🍃 Senna Leaves — $16.99\n⚫ Shilajit Resin — $49.99\n\nAll USDA Organic & Non-GMO ✓",
         [{ label: "🛍️ Shop Now", value: "shop" }]
       );
       return;
@@ -287,7 +287,7 @@ export default function ChatWidget() {
         "💚 *Why Our Products?*\n✓ USDA Organic — purest quality\n✓ Non-GMO & lab-tested\n✓ Zero additives or fillers\n✓ Wild-harvested & ethically sourced\n✓ Hundreds of 5-star reviews\n\nWhich product's benefits would you like to know about?",
         [
           { label: "⚫ Shilajit Resin", value: "shilajit" },
-          { label: "🍑 Apricot Seeds", value: "apricot seeds" },
+          { label: "🍑 Apricot Kernels", value: "apricot kernels" },
           { label: "🌼 Calendula", value: "calendula" },
           { label: "🧡 Sea Buckthorn", value: "sea buckthorn" },
         ]

@@ -153,11 +153,11 @@ export const products: Product[] = [
   },
   {
     id: "bitter-apricot-seeds-8oz",
-    name: "Organic Bitter Apricot Seeds (8 oz)",
+    name: "Organic Bitter Apricot Kernels (8 oz)",
     price: 19.99,
     description: "Raw, unprocessed bitter apricot kernels — sustainably sourced, 100% pure organic, USDA certified.",
     longDescription:
-      "Our Organic Bitter Apricot Seeds (8 oz) are carefully sourced and minimally processed to preserve all their natural goodness. These raw, unprocessed kernels have been used in traditional wellness practices across many cultures. Sustainably sourced, premium quality kernels for a healthy and natural lifestyle. Rich in healthy fats and protein, they make a distinctive addition to your daily wellness routine. Enjoy 3 kernels daily — add to yogurt, smoothies, salads, or soups.",
+      "Our Organic Bitter Apricot Kernels (8 oz) are carefully sourced and minimally processed to preserve all their natural goodness. These raw, unprocessed kernels have been used in traditional wellness practices across many cultures. Sustainably sourced, premium quality kernels for a healthy and natural lifestyle. Rich in healthy fats and protein, they make a distinctive addition to your daily wellness routine. Enjoy 3 kernels daily — add to yogurt, smoothies, salads, or soups.",
     benefits: [
       "100% natural and organic",
       "Raw and unprocessed kernels",
@@ -212,11 +212,11 @@ export const products: Product[] = [
   },
   {
     id: "bitter-apricot-seeds-1lb",
-    name: "Organic Bitter Apricot Seeds (1 lb)",
+    name: "Organic Bitter Apricot Kernels (1 lb)",
     price: 29.99,
     description: "Value-size 1 lb bag of raw, unprocessed bitter apricot kernels — 100% pure organic, USDA certified.",
     longDescription:
-      "Our 1 lb value-size bag of Organic Bitter Apricot Seeds is perfect for those who use bitter apricot kernels regularly as part of their wellness routine. Carefully sourced and minimally processed to preserve all their natural goodness, these raw, unprocessed kernels have been used in traditional wellness practices across many cultures. Sustainably sourced, premium quality kernels — USDA Organic, 100% Organic, and Non-GMO certified.",
+      "Our 1 lb value-size bag of Organic Bitter Apricot Kernels is perfect for those who use bitter apricot kernels regularly as part of their wellness routine. Carefully sourced and minimally processed to preserve all their natural goodness, these raw, unprocessed kernels have been used in traditional wellness practices across many cultures. Sustainably sourced, premium quality kernels — USDA Organic, 100% Organic, and Non-GMO certified.",
     benefits: [
       "Best value — 1 lb bulk supply",
       "100% natural and organic",
