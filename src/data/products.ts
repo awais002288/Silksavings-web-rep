@@ -225,7 +225,7 @@ export const products: Product[] = [
       "No preservatives or additives",
     ],
     usage: "Enjoy 3 kernels daily. Add to yogurt, blend into smoothies, sprinkle on salads, or stir into soups.",
-    images: withPrimary(imagesForFolder("1Lb apricot"), "IMG_0574"),
+    images: withPrimary(imagesForFolder("1Lb apricot"), "IMG_0577"),
     badge: "Best Value",
     category: "Kernels & Superfoods",
     weight: "1 lb",
