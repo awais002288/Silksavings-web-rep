@@ -21,10 +21,10 @@ const shopCategories = [
     bg: "#fdf8ee",
   },
   {
-    name: "Seeds & Kernels",
+    name: "Kernels & Superfoods",
     desc: "Apricot Kernels, Sea Buckthorn & more",
-    href: "/products?cat=Seeds+%26+Kernels",
-    image: getProductById("bitter-apricot-seeds-1lb")!.images[0],
+    href: "/products?cat=Kernels+%26+Superfoods",
+    image: getProductById("bitter-apricot-kernels-1lb")!.images[0],
     accent: "#2c5530",
     bg: "#f0f7f0",
   },
@@ -258,7 +258,7 @@ export default function Home() {
             <span className="gold-text">Delivered to You</span>
           </h1>
           <p className="text-white/90 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed font-sans">
-            Premium organic herbs, flowers, and seeds — ethically sourced, carefully dried, and tested for purity.
+            Premium organic herbs, flowers, and kernels — ethically sourced, carefully dried, and tested for purity.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <Link
@@ -327,7 +327,7 @@ export default function Home() {
               </div>
               <div className="space-y-3 md:space-y-4 pt-6 md:pt-8">
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-48 md:h-64">
-                  <img src={getProductById("bitter-apricot-seeds-8oz")!.images[0]} alt="Apricot kernels" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
+                  <img src={getProductById("bitter-apricot-kernels-8oz")!.images[0]} alt="Apricot kernels" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-md bg-white h-36 md:h-48">
                   <img src={getProductById("dried-lemon-grass")!.images[0]} alt="Lemon grass" loading="lazy" decoding="async" className="w-full h-full object-contain p-2" />

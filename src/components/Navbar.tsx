@@ -115,8 +115,8 @@ export default function Navbar() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/products?cat=Seeds+%26+Kernels" className="cursor-pointer font-sans focus:bg-white/10 focus:text-white">
-                    Seeds &amp; Kernels
+                  <Link href="/products?cat=Kernels+%26+Superfoods" className="cursor-pointer font-sans focus:bg-white/10 focus:text-white">
+                    Kernels &amp; Superfoods
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -241,11 +241,11 @@ export default function Navbar() {
                   Dried Flowers
                 </Link>
                 <Link
-                  href="/products?cat=Seeds+%26+Kernels"
+                  href="/products?cat=Kernels+%26+Superfoods"
                   className="min-h-[38px] flex items-center text-xs text-white/85 hover:text-[#c9a227] transition-colors font-sans py-1"
                   onClick={() => setMenuOpen(false)}
                 >
-                  Seeds &amp; Kernels
+                  Kernels &amp; Superfoods
                 </Link>
                 <Link
                   href="/products?cat=Herbs+%26+Leaves"

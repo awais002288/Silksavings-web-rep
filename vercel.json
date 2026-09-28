@@ -1,6 +1,7 @@
 {
   "routes": [
     { "src": "/api/(.*)", "dest": "https://silksaving-backend.onrender.com/api/$1" },
+    { "src": "/products/bitter-apricot-seeds-(8oz|1lb)", "status": 301, "headers": { "Location": "/products/bitter-apricot-kernels-$1" } },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]

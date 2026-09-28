@@ -164,7 +164,7 @@ function NutritionLabel({ facts }: { facts: NonNullable<ReturnType<typeof getPro
 function ProductNotFound() {
   useSEO({
     title: "Product Not Found | Silk Savings®",
-    description: "The requested organic product could not be found. Browse our full catalog of USDA Organic herbs, flowers, and seeds.",
+    description: "The requested organic product could not be found. Browse our full catalog of USDA Organic herbs, flowers, and kernels.",
     noindex: true,
   });
 

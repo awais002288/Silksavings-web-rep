@@ -64,7 +64,7 @@ const teaPrepSteps: PrepStep[] = [
   { icon: "☕", label: "Enjoy", detail: "Sweeten with honey if desired" },
 ];
 
-const seedPrepSteps: PrepStep[] = [
+const kernelPrepSteps: PrepStep[] = [
   { icon: "📏", label: "Measure", detail: "3 kernels per serving" },
   { icon: "🥣", label: "Add to Yogurt", detail: "Stir into yogurt or oatmeal" },
   { icon: "🥤", label: "Or Blend", detail: "Add to your morning smoothie" },
@@ -152,7 +152,7 @@ export const products: Product[] = [
     ],
   },
   {
-    id: "bitter-apricot-seeds-8oz",
+    id: "bitter-apricot-kernels-8oz",
     name: "Organic Bitter Apricot Kernels (8 oz)",
     price: 19.99,
     description: "Raw, unprocessed bitter apricot kernels — sustainably sourced, 100% pure organic, USDA certified.",
@@ -168,12 +168,12 @@ export const products: Product[] = [
     usage: "Enjoy 3 kernels daily. Add to yogurt, blend into smoothies, sprinkle on salads, or stir into soups.",
     images: imagesForFolder("8oz apricot"),
     badge: "Popular",
-    category: "Seeds & Kernels",
+    category: "Kernels & Superfoods",
     weight: "8 oz",
     sku: "SS-APR-8OZ",
     mpn: "SS-APR-8OZ",
     brand: "Silk Savings®",
-    prepSteps: seedPrepSteps,
+    prepSteps: kernelPrepSteps,
     nutritionFacts: {
       servingSize: "3 kernels (1g)",
       calories: 5,
@@ -204,14 +204,14 @@ export const products: Product[] = [
         location: "Miami, FL",
         rating: 5,
         title: "Very happy with this purchase",
-        body: "I add 3 seeds to my morning yogurt every day. The packaging is excellent and the seeds smell fresh. Will be a repeat customer.",
+        body: "I add 3 kernels to my morning yogurt every day. The packaging is excellent and the kernels smell fresh. Will be a repeat customer.",
         date: "March 2025",
         avatar: "M",
       },
     ],
   },
   {
-    id: "bitter-apricot-seeds-1lb",
+    id: "bitter-apricot-kernels-1lb",
     name: "Organic Bitter Apricot Kernels (1 lb)",
     price: 29.99,
     description: "Value-size 1 lb bag of raw, unprocessed bitter apricot kernels — 100% pure organic, USDA certified.",
@@ -227,12 +227,12 @@ export const products: Product[] = [
     usage: "Enjoy 3 kernels daily. Add to yogurt, blend into smoothies, sprinkle on salads, or stir into soups.",
     images: withPrimary(imagesForFolder("1Lb apricot"), "IMG_0574"),
     badge: "Best Value",
-    category: "Seeds & Kernels",
+    category: "Kernels & Superfoods",
     weight: "1 lb",
     sku: "SS-APR-16OZ",
     mpn: "SS-APR-16OZ",
     brand: "Silk Savings®",
-    prepSteps: seedPrepSteps,
+    prepSteps: kernelPrepSteps,
     nutritionFacts: {
       servingSize: "3 kernels (1g)",
       calories: 5,
@@ -562,7 +562,7 @@ export const products: Product[] = [
     usage: "Add 1 tsp to 8 oz of hot water, steep for 10 minutes, strain, and enjoy. Can also be blended into smoothies or sprinkled over yogurt and oatmeal.",
     images: imagesForFolder("Wild sea buckthron"),
     badge: "New",
-    category: "Seeds & Kernels",
+    category: "Kernels & Superfoods",
     weight: "5 oz",
     sku: "SS-SBT-5OZ",
     mpn: "SS-SBT-5OZ",
@@ -687,7 +687,7 @@ export const products: Product[] = [
     usage: "Use the included spatula to measure a pea-sized portion (250-500mg). Dissolve in warm water, milk, or your favorite beverage. Take once daily, preferably in the morning.",
     images: imagesForFolder("Shilajit"),
     badge: "Premium",
-    category: "Seeds & Kernels",
+    category: "Kernels & Superfoods",
     weight: "30g",
     sku: "SS-SHL-30G",
     mpn: "SS-SHL-30G",
@@ -738,7 +738,7 @@ export const categories = [...new Set(products.map((p) => p.category))];
 
 export const BROAD_CATEGORY_KEYWORDS: Record<string, string> = {
   Flowers: "organic dried flowers, natural herbal teas, dried flowers for crafts, edible flowers bulk",
-  "Seeds & Kernels": "bulk dried herbs, organic superfood seeds, raw seeds for skincare",
+  "Kernels & Superfoods": "bulk dried herbs, organic superfood kernels, raw kernels for skincare",
   "Herbs & Leaves": "bulk dried herbs, natural herbal teas, herbs for skincare, organic loose leaf herbs",
 };
 

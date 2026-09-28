@@ -22,8 +22,8 @@ const EMPTY: FormState = { name: "", email: "", subject: "", message: "" };
 
 export default function Contact() {
   useSEO({
-    title: "Contact Us | Silk Savings® — Organic Herbs, Dried Flowers & Seeds",
-    description: "Contact Silk Savings® for questions about USDA Organic herbs, dried flowers & seeds. Order help, wholesale inquiries — we reply within 24–48 hours.",
+    title: "Contact Us | Silk Savings® — Organic Herbs, Dried Flowers & Kernels",
+    description: "Contact Silk Savings® for questions about USDA Organic herbs, dried flowers & kernels. Order help, wholesale inquiries — we reply within 24–48 hours.",
     keywords: "contact Silk Savings, organic herbs support, USDA organic store contact, buy organic herbs help",
     canonical: "https://www.silksavings.shop/contact",
   });

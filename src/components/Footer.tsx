@@ -25,7 +25,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-white/75 text-xs font-sans leading-relaxed max-w-48">
-              Premium organic herbs, flowers &amp; seeds — ethically sourced.
+              Premium organic herbs, flowers &amp; kernels — ethically sourced.
             </p>
           </div>
 
@@ -37,7 +37,7 @@ export default function Footer() {
                 {[
                   { href: "/products", label: "All Products" },
                   { href: "/products?cat=Flowers", label: "Dried Flowers" },
-                  { href: "/products?cat=Seeds+%26+Kernels", label: "Seeds & Kernels" },
+                  { href: "/products?cat=Kernels+%26+Superfoods", label: "Kernels & Superfoods" },
                   { href: "/products?cat=Herbs+%26+Leaves", label: "Herbs & Leaves" },
                 ].map((l) => (
                   <li key={l.href}><Link href={l.href} className="text-white/80 hover:text-white text-sm transition-colors font-sans">{l.label}</Link></li>

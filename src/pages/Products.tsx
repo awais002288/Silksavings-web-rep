@@ -24,11 +24,11 @@ const CATEGORY_SEO_DATA: Record<
   }
 > = {
   All: {
-    title: "Shop All Organic Botanicals, Dried Flowers & Seeds | Silk Savings®",
-    description: "Explore the complete Silk Savings® catalog of USDA Organic loose dried flowers, nutritious seeds, medicinal herbs, and pure mountain shilajit resin. 100% lab-tested purity.",
-    keywords: "organic botanicals catalog, buy dried herbs online, organic seeds collection, dried edible flowers, herbal infusions shop, certified organic apothecary, bulk dried herbs, natural herbal teas",
-    heading: "Organic Herbs, Dried Flowers & Seeds",
-    subheading: "Explore premium USDA Organic botanicals, sun-dried flowers, and nutrient-dense seeds — 100% pure and additive-free.",
+    title: "Shop All Organic Botanicals, Dried Flowers & Kernels | Silk Savings®",
+    description: "Explore the complete Silk Savings® catalog of USDA Organic loose dried flowers, nutritious kernels, medicinal herbs, and pure mountain shilajit resin. 100% lab-tested purity.",
+    keywords: "organic botanicals catalog, buy dried herbs online, organic kernels collection, dried edible flowers, herbal infusions shop, certified organic apothecary, bulk dried herbs, natural herbal teas",
+    heading: "Organic Herbs, Dried Flowers & Kernels",
+    subheading: "Explore premium USDA Organic botanicals, sun-dried flowers, and nutrient-dense kernels — 100% pure and additive-free.",
     guideTitle: "The Silk Savings® Botanical Quality Standard",
     guideText: "Every botanical in our collection is sustainably cultivated or wildcrafted at peak potency, gently dried at low temperatures to preserve essential phytonutrients, and rigorously tested for purity. Whether you are brewing restorative herbal infusions, handcrafting skincare salves, or supplementing daily wellness with raw superfoods, our USDA Organic verification guarantees zero pesticides, radiation, or artificial additives.",
     faqs: [
@@ -37,12 +37,12 @@ const CATEGORY_SEO_DATA: Record<
         answer: "All Silk Savings® botanicals are sourced from certified organic family farms and pristine mountain regions. Every harvest holds USDA Organic, Non-GMO Project, and Halal certifications, and undergoes third-party ISO-17025 accredited laboratory testing.",
       },
       {
-        question: "How should I store loose dried herbs and seeds?",
+        question: "How should I store loose dried herbs and kernels?",
         answer: "Store your botanicals in their original resealable, UV-protective pouches in a cool, dry pantry away from direct sunlight and moisture. Under these conditions, our dried herbs retain full potency for up to 24 months.",
       },
       {
         question: "Can these botanicals be used for culinary and cosmetic purposes?",
-        answer: "Yes! Our dried flowers, seeds, and herbs are 100% food-grade. They are extensively used for brewing artisanal herbal teas, infusing facial serums and bath soaks, and flavoring gourmet culinary recipes.",
+        answer: "Yes! Our dried flowers, kernels, and herbs are 100% food-grade. They are extensively used for brewing artisanal herbal teas, infusing facial serums and bath soaks, and flavoring gourmet culinary recipes.",
       },
       {
         question: "What is your shipping policy and satisfaction guarantee?",
@@ -73,14 +73,14 @@ const CATEGORY_SEO_DATA: Record<
       },
     ],
   },
-  "Seeds & Kernels": {
+  "Kernels & Superfoods": {
     title: "Organic Apricot Kernels, Sea Buckthorn & Shilajit | Silk Savings®",
     description: "Shop raw organic bitter apricot kernels, wild sea buckthorn berries, and pure sun-dried Himalayan Shilajit resin. Nutrient-dense organic superfoods.",
-    keywords: "organic apricot kernels, raw bitter apricot kernels, bulk apricot kernels, wild sea buckthorn berries, pure shilajit resin, organic superfood seeds, bulk dried herbs",
-    heading: "Organic Seeds, Kernels & Superfoods",
+    keywords: "organic apricot kernels, raw bitter apricot kernels, bulk apricot kernels, wild sea buckthorn berries, pure shilajit resin, organic superfood kernels, bulk dried herbs",
+    heading: "Organic Kernels & Superfoods",
     subheading: "Unprocessed bitter apricot kernels, nutrient-packed sea buckthorn, and authentic mineral-rich Himalayan Shilajit.",
-    guideTitle: "Superfood Guide: Seeds, Berries & Mountain Resin",
-    guideText: "From raw, sun-dried bitter apricot kernels to wild-harvested sea buckthorn berries and authentic high-altitude Shilajit resin, our seeds and superfoods deliver dense nutritional profiles rich in healthy fatty acids, vitamins A, C, and E, and over 84 trace minerals.",
+    guideTitle: "Superfood Guide: Kernels, Berries & Mountain Resin",
+    guideText: "From raw, sun-dried bitter apricot kernels to wild-harvested sea buckthorn berries and authentic high-altitude Shilajit resin, our kernels and superfoods deliver dense nutritional profiles rich in healthy fatty acids, vitamins A, C, and E, and over 84 trace minerals.",
     faqs: [
       {
         question: "What is the recommended daily serving of bitter apricot kernels?",
@@ -91,7 +91,7 @@ const CATEGORY_SEO_DATA: Record<
         answer: "Dissolve a pea-sized portion (250–500mg) using the included spatula into warm water, herbal tea, or warm milk. Drink in the morning for sustained natural energy.",
       },
       {
-        question: "Are these seeds raw and unprocessed?",
+        question: "Are these kernels raw and unprocessed?",
         answer: "Yes, our bitter apricot kernels and sea buckthorn berries are raw, unroasted, non-GMO, and certified organic with zero added oils or preservatives.",
       },
     ],
@@ -121,11 +121,17 @@ const CATEGORY_SEO_DATA: Record<
   },
 };
 
+// Old category names still linked from ads and search results
+const LEGACY_CATEGORIES: Record<string, string> = {
+  "Seeds & Kernels": "Kernels & Superfoods",
+};
+
 export default function Products() {
   const [, navigate] = useLocation();
   const search = useSearch();
   const params = new URLSearchParams(search);
-  const activeCategory = params.get("cat") || "All";
+  const rawCategory = params.get("cat") || "All";
+  const activeCategory = LEGACY_CATEGORIES[rawCategory] ?? rawCategory;
 
   const allCategories = ["All", ...categories];
   const isValidCategory = activeCategory === "All" || categories.includes(activeCategory);

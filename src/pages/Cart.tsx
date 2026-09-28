@@ -7,7 +7,7 @@ import { useSEO } from "@/hooks/useSEO";
 export default function Cart() {
   useSEO({
     title: "Your Cart | Silk Savings® — Organic Herbs & Botanicals",
-    description: "Review your organic herbs, dried flowers & seeds order. USDA Organic, Non-GMO, lab-tested. Checkout securely at Silk Savings®.",
+    description: "Review your organic herbs, dried flowers & kernels order. USDA Organic, Non-GMO, lab-tested. Checkout securely at Silk Savings®.",
     keywords: "organic herbs cart, buy organic herbs, USDA organic checkout, Silk Savings",
     canonical: "https://www.silksavings.shop/cart",
     noindex: true,
@@ -89,7 +89,7 @@ export default function Cart() {
         <div className="text-center max-w-md">
           <div className="text-8xl mb-6">🛒</div>
           <h1 className="text-3xl font-bold text-[#1e3a22] mb-3">Your cart is empty</h1>
-          <p className="text-gray-500 font-sans mb-8">Discover our premium organic herbs, seeds, and botanicals.</p>
+          <p className="text-gray-500 font-sans mb-8">Discover our premium organic herbs, kernels, and botanicals.</p>
           <Link
             href="/products"
             className="inline-block bg-[#2c5530] text-white px-8 py-4 rounded-full font-bold text-base hover:bg-[#1e3a22] transition-all shadow-lg font-sans"

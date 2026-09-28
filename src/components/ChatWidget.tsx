@@ -25,7 +25,7 @@ const KB: { keywords: string[]; reply: string; link?: string }[] = [
     keywords: ["apricot", "kernels", "b17", "amygdalin"],
     reply:
       "🍑 *Organic Bitter Apricot Kernels*\n• 8 oz — $17.99\n• 1 lb value pack — $29.99\nRaw, unprocessed, USDA Organic. Popular in traditional wellness routines. Non-GMO certified.\n👉 Which size works for you?",
-    link: "/products/bitter-apricot-seeds-8oz",
+    link: "/products/bitter-apricot-kernels-8oz",
   },
   {
     keywords: ["rose", "petals", "rosewater"],

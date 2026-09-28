@@ -3,8 +3,8 @@ import { useSEO } from "@/hooks/useSEO";
 
 export default function Returns() {
   useSEO({
-    title: "Return Policy | Silk Savings® — Organic Herbs & Seeds",
-    description: "Silk Savings® 30-day return policy for USDA Organic herbs, dried flowers & seeds. Easy returns and full refunds. Your satisfaction guaranteed.",
+    title: "Return Policy | Silk Savings® — Organic Herbs & Kernels",
+    description: "Silk Savings® 30-day return policy for USDA Organic herbs, dried flowers & kernels. Easy returns and full refunds. Your satisfaction guaranteed.",
     keywords: "return policy, organic herbs return, Silk Savings refund, USDA organic store returns",
     canonical: "https://www.silksavings.shop/returns",
   });

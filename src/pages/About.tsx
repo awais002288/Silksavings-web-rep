@@ -4,9 +4,9 @@ import { getProductById } from "@/data/products";
 
 export default function About() {
   useSEO({
-    title: "About Silk Savings® | USDA Organic Herbs, Dried Flowers & Seeds",
-    description: "Silk Savings® sells USDA Organic herbs, dried flowers & seeds. Non-GMO, lab-tested, zero additives. Ethically sourced from certified organic farms.",
-    keywords: "about Silk Savings, organic herbs brand, USDA organic company, Non-GMO botanicals, organic dried flowers, organic seeds",
+    title: "About Silk Savings® | USDA Organic Herbs, Dried Flowers & Kernels",
+    description: "Silk Savings® sells USDA Organic herbs, dried flowers & kernels. Non-GMO, lab-tested, zero additives. Ethically sourced from certified organic farms.",
+    keywords: "about Silk Savings, organic herbs brand, USDA organic company, Non-GMO botanicals, organic dried flowers, organic kernels",
     canonical: "https://www.silksavings.shop/about",
   });
   return (

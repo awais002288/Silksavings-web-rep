@@ -2,8 +2,8 @@ import { useSEO } from "@/hooks/useSEO";
 
 export default function Privacy() {
   useSEO({
-    title: "Privacy Policy | Silk Savings® — Organic Herbs & Seeds",
-    description: "Silk Savings® privacy policy. Learn how we protect your data when you shop USDA Organic herbs, dried flowers & seeds. Your privacy matters.",
+    title: "Privacy Policy | Silk Savings® — Organic Herbs & Kernels",
+    description: "Silk Savings® privacy policy. Learn how we protect your data when you shop USDA Organic herbs, dried flowers & kernels. Your privacy matters.",
     keywords: "Silk Savings privacy, organic herbs store privacy policy, USDA organic shop data policy",
     canonical: "https://www.silksavings.shop/privacy",
   });
