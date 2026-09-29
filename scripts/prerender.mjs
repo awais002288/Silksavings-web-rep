@@ -17,7 +17,37 @@ import { createServer } from "node:http";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import puppeteer from "puppeteer";
+
+// Vercel's build container is missing several shared libraries
+// (libnspr4.so, libnss3.so, ...) that regular puppeteer's bundled Chromium
+// needs, so it fails with "error while loading shared libraries" there.
+// @sparticuz/chromium ships a build made for exactly this kind of
+// restricted Linux container. Use it (via puppeteer-core, which doesn't
+// bundle its own browser) when running on Vercel; use plain `puppeteer`'s
+// own downloaded Chromium for local dev builds.
+// Ref: https://github.com/Sparticuz/chromium
+const isVercel = Boolean(process.env.VERCEL);
+
+async function launchBrowser() {
+  if (isVercel) {
+    const { default: chromium } = await import("@sparticuz/chromium");
+    const { default: puppeteerCore } = await import("puppeteer-core");
+    return puppeteerCore.launch({
+      executablePath: await chromium.executablePath(),
+      args: await puppeteerCore.defaultArgs({
+        args: chromium.args,
+        headless: "shell",
+      }),
+      defaultViewport: { width: 1280, height: 800 },
+      headless: "shell",
+    });
+  }
+  const { default: puppeteer } = await import("puppeteer");
+  return puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+}
 
 const rootDir = path.resolve(import.meta.dirname, "..");
 const distDir = path.join(rootDir, "dist");
@@ -104,12 +134,13 @@ async function main() {
   const { port } = server.address();
   const baseUrl = `http://127.0.0.1:${port}`;
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await launchBrowser();
 
-  console.log(`\nPrerendering ${routes.length} route(s) for crawler visibility...`);
+  console.log(
+    `\nPrerendering ${routes.length} route(s) for crawler visibility (${
+      isVercel ? "@sparticuz/chromium" : "local puppeteer"
+    })...`,
+  );
 
   try {
     for (const route of routes) {
